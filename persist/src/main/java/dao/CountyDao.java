@@ -6,9 +6,9 @@ import daomodels.County;
 
 public interface CountyDao {
 
-	public void recordCounty(County county);
+	void recordCounty(County county);
 
-	public List<County> getAllCounties();
+	List<County> getAllCounties();
 
-	public void deleteCounty(County county);
+	void deleteCounty(County county);
 }
