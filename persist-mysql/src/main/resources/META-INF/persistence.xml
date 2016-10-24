@@ -6,6 +6,14 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
     <persistence-unit name="REMAN" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <class>daomodels.County</class>       
-        
+        <class>daomodels.Food</class>   
+        <class>daomodels.FoodType</class>   
+        <class>daomodels.Reason</class>   
+        <class>daomodels.Reservation</class>   
+        <class>daomodels.ReservationPlaces</class>   
+        <class>daomodels.Restaurant</class>   
+        <class>daomodels.RestaurantFood</class>   
+        <class>daomodels.RestaurantReason</class>   
+        <class>daomodels.RestaurantTable</class>   
     </persistence-unit>
 </persistence>
