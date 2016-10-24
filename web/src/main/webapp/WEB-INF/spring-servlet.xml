@@ -17,6 +17,4 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
   <mvc:annotation-driven />
 
   <import resource="classpath:persistMysqlApplicationContext.xml"/>
-  
-  <context:component-scan base-package="controllers" />
 </beans>
