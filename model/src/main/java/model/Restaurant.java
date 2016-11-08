@@ -8,8 +8,13 @@ public class Restaurant {
 	private String name;
 	private Date founding;
 	private RestaurantType type;
-//	private ArrayList<PaymentType> payments = new ArrayList<PaymentType>();
-//	private ArrayList<TableType> tables = new ArrayList<TableType>();
+//	private ArrayList<PaymentType> payments;
+//	private ArrayList<TableType> tables;
+	
+	public Restaurant(){
+	//	payments = new ArrayList<PaymentType>();
+	//	tables = new ArrayList<TableType>();
+	}
 
 	public String getName() {
 		return name;
@@ -40,6 +45,5 @@ public class Restaurant {
 	}
 	public void setTables(ArrayList<TableType> tables) {
 		this.tables = tables;
-	}
-	*/	
+	}	*/
 }
