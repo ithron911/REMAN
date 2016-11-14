@@ -2,10 +2,8 @@ package model;
 
 public enum PaymentType {
 
-	CASH("cash"),
-	BANKCARD("bankcard"),
-	COUPON("coupon"),
-	PAYPAL("paypal");
+	INPLACE("inplace"),
+	ONLINE("online");
 
 	private String paymentType;
 
