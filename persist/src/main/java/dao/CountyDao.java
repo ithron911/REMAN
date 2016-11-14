@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import exceptions.DeleteFailedException;
 import exceptions.InsertFailedException;
 import exceptions.MultipleResultException;
@@ -13,7 +15,9 @@ public interface CountyDao {
 
 	public void updateCounty(County county) throws UpdateFailedException;
 
-	public void getCounty(County county) throws NoResultException, MultipleResultException;
+	public void getCounty(String countyName) throws NoResultException, MultipleResultException;
+
+	public List<County> getAllCounties() throws NoResultException;
 
 	public void deleteCounty(County county) throws DeleteFailedException;
 }
