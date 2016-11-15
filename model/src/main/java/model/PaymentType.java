@@ -2,8 +2,10 @@ package model;
 
 public enum PaymentType {
 
-	INPLACE("inplace"),
-	ONLINE("online");
+	IN_CASH("inCash"),
+	WITH_CARD("withCard"),
+	ONLINE("online"),
+	COUPON("coupon");
 
 	private String paymentType;
 

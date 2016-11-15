@@ -4,22 +4,25 @@ import java.util.Date;
 import java.util.List;
 
 public class Reservation {
-	
-	public enum Currency {
-		EUR,
-		HUF,
-		USD,
-		GBP,
-	}
 
+	private int id;
 	private Date dateBook;
-	private int price;
+	private double price;
 	private Currency currency;
 	private String comment;
-	private PaymentType paymentType;
+	private Payment payment;
+	private String restaurantName;
 	private List<Table> tables;
 	
 	public Reservation() {}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public Date getDateBook() {
 		return dateBook;
@@ -29,11 +32,11 @@ public class Reservation {
 		this.dateBook = dateBook;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
@@ -45,12 +48,12 @@ public class Reservation {
 		this.comment = comment;
 	}
 
-	public PaymentType getPaymentType() {
-		return paymentType;
+	public Payment getPayment() {
+		return payment;
 	}
 
-	public void setPaymentType(PaymentType paymentType) {
-		this.paymentType = paymentType;
+	public void setPayment(Payment payment) {
+		this.payment = payment;
 	}
 
 	public Currency getCurrency() {
@@ -67,5 +70,13 @@ public class Reservation {
 
 	public void setTables(List<Table> tables) {
 		this.tables = tables;
+	}
+
+	public String getRestaurantName() {
+		return restaurantName;
+	}
+
+	public void setRestaurant(String restaurantName) {
+		this.restaurantName = restaurantName;
 	}
 }

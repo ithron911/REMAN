@@ -1,29 +1,13 @@
 package model;
 
-import java.util.List;
-
 public class Food {
-	
-	public enum foodTypes {
-		Main,
-		Soup,
-		Breakfast,
-		Dessert,		
-		Pizza,
-		Fastfood,
-		Dish,
-		Garnish,
-		Salads,
-		Vegetarian,
-		Drinks,	
-	}
 	
 	private int id;
 	private String name;
-	private foodTypes foodTypes;
-	private int price;
+	private FoodType foodType;
+	private double price;
+	private CurrencyType currency;
 	private String description;
-	private List<String> ingredients;	
 	
 	public int getId() {
 		return id;
@@ -37,16 +21,16 @@ public class Food {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public foodTypes getFoodTypes() {
-		return foodTypes;
+	public FoodType getFoodTypes() {
+		return foodType;
 	}
-	public void setFoodTypes(foodTypes foodTypes) {
-		this.foodTypes = foodTypes;
+	public void setFoodTypes(FoodType foodType) {
+		this.foodType = foodType;
 	}
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	public String getDescription() {
@@ -55,11 +39,16 @@ public class Food {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public List<String> getIngredients() {
-		return ingredients;
+	public FoodType getFoodType() {
+		return foodType;
 	}
-	public void setIngredients(List<String> ingredients) {
-		this.ingredients = ingredients;
+	public void setFoodType(FoodType foodType) {
+		this.foodType = foodType;
 	}
-
+	public CurrencyType getCurrency() {
+		return currency;
+	}
+	public void setCurrency(CurrencyType currency) {
+		this.currency = currency;
+	}
 }
