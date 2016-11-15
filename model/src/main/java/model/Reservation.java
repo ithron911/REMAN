@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Reservation {
 	
@@ -16,7 +17,7 @@ public class Reservation {
 	private Currency currency;
 	private String comment;
 	private PaymentType paymentType;
-	private TableType tableType;
+	private List<Table> tables;
 	
 	public Reservation() {}
 
@@ -52,14 +53,6 @@ public class Reservation {
 		this.paymentType = paymentType;
 	}
 
-	public TableType getTableType() {
-		return tableType;
-	}
-
-	public void setTableType(TableType tableType) {
-		this.tableType = tableType;
-	}
-
 	public Currency getCurrency() {
 		return currency;
 	}
@@ -67,5 +60,12 @@ public class Reservation {
 	public void setCurrency(Currency currency) {
 		this.currency = currency;
 	}
-	
+
+	public List<Table> getTables() {
+		return tables;
+	}
+
+	public void setTables(List<Table> tables) {
+		this.tables = tables;
+	}
 }

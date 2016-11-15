@@ -9,7 +9,7 @@ public class Restaurant {
 	private Date founding;
 	private RestaurantType type;
 	private ArrayList<PaymentType> payments;
-	private ArrayList<TableType> tables;
+	private ArrayList<Table> tables;
 	
 	public Restaurant(){
 	}
@@ -38,10 +38,10 @@ public class Restaurant {
 	public void setPayments(ArrayList<PaymentType> payments) {
 		this.payments = payments;
 	}
-	public ArrayList<TableType> getTables() {
+	public ArrayList<Table> getTables() {
 		return tables;
 	}
-	public void setTables(ArrayList<TableType> tables) {
+	public void setTables(ArrayList<Table> tables) {
 		this.tables = tables;
 	}
 }
