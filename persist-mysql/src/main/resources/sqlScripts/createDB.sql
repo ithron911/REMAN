@@ -15,10 +15,10 @@ CREATE TABLE Restaurant(
 CREATE TABLE Food(
 	ID INT NOT NULL AUTO_INCREMENT,
 	RestaurantName VARCHAR(30),
-    Name VARCHAR(100) NOT NULL,
-    FoodType VARCHAR(50),
-    Price INT,
-    PRIMARY KEY ( ID ),
+    	Name VARCHAR(100) NOT NULL,
+    	FoodType VARCHAR(50),
+    	Price INT,
+    	PRIMARY KEY ( ID ),
 	FOREIGN KEY ( RestaurantName ) REFERENCES Restaurant(Name)
 );
 
@@ -45,8 +45,8 @@ CREATE TABLE Reservation(
 	PaymantID INT,
 	FoodID INT,
 	Price INT,
-    DateBook DATE,
-    Comment Varchar(200),
+	DateBook DATE,
+	Comment Varchar(200),
 	FOREIGN KEY ( RestaurantName ) REFERENCES Restaurant(Name),
 	FOREIGN KEY ( FoodID) REFERENCES Food(ID),
 	FOREIGN KEY ( PaymantID ) REFERENCES Payment(ID)
