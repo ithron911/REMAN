@@ -10,7 +10,7 @@ CREATE TABLE Restaurant(
 	Founding VARCHAR(30),
 	Type VARCHAR(30),
 	PRIMARY KEY ( Name )
-)
+);
 
 CREATE TABLE Food(
 	ID INT NOT NULL AUTO_INCREMENT,
