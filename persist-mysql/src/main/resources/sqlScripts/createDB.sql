@@ -7,7 +7,7 @@ FLUSH PRIVILEGES;
 
 CREATE TABLE Restaurant(
 	Name VARCHAR(30) NOT NULL,
-	Founding VARCHAR(30),
+	Founding DATE,
 	Type VARCHAR(30),
 	PRIMARY KEY ( Name )
 );
