@@ -1,13 +1,9 @@
 CREATE DATABASE REMAN;
 USE REMAN;
 
-CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';
-GRANT ALL PRIVILEGES ON REMAN.* TO 'admin'@'localhost';
-FLUSH PRIVILEGES;
-
 CREATE TABLE Restaurant(
 	Name VARCHAR(30) NOT NULL,
-	Founding VARCHAR(30),
+	Founding DATE,
 	Type VARCHAR(30),
 	PRIMARY KEY ( Name )
 );
