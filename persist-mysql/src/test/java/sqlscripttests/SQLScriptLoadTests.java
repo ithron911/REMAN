@@ -24,11 +24,12 @@ import com.mysql.cj.jdbc.Driver;
 
 public class SQLScriptLoadTests {
 
-	private static String HOST;
-	private static Integer PORT;
-	private static String DATABASE;
-	private static String USER;
-	private static String PASSWORD;
+	protected static String HOST;
+	protected static Integer PORT;
+	protected static String DATABASE;
+	protected static String USER;
+	protected static String PASSWORD;
+	protected static String MYBATIS_CONFIG;
 
 	@BeforeClass
 	public static void beforeClass() {
@@ -39,10 +40,11 @@ public class SQLScriptLoadTests {
 			DATABASE = System.getProperty("database.db");
 			USER = System.getProperty("database.user");
 			PASSWORD = System.getProperty("database.password");
+			MYBATIS_CONFIG = System.getProperty("mybatis.config");
 		} catch (NumberFormatException ex) {
 			Assume.assumeNoException(ex);
 		}
-
+		Assume.assumeNotNull(HOST,PORT,DATABASE,USER,PASSWORD,MYBATIS_CONFIG);
 		runSQLScript("sqlScripts/createDB.sql");
 
 	}
@@ -93,13 +95,4 @@ public class SQLScriptLoadTests {
 		
 	}
 
-	@Test
-	public void testSQLScripts() {
-		System.out.println("Test 001");
-	}
-	
-	@Test
-	public void testSQLScripts1() {
-		System.out.println("Test 02");
-	}
 }
