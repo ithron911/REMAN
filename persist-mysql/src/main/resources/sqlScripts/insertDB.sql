@@ -11,16 +11,16 @@ INSERT INTO Restaurant VALUES('Giotto Gelato', '2000-01-01', 'casual');
 INSERT INTO Restaurant VALUES('Hey Buddha!', '2013-05-09', 'casual');
 INSERT INTO Restaurant VALUES('Isosphere', '2011-10-29', 'streetfood');
 
-INSERT INTO Food VALUES(NULL, 'Giotto Gelato', 'Goulash', 'Soup', 850);
-INSERT INTO Food VALUES(NULL, 'Hey Buddha!', 'Tofu Taco', 'Vegetarian', 1000);
-INSERT INTO Food VALUES(NULL, 'Isosphere', 'Coca-Cola', 'Drinks', 250);
-INSERT INTO Food VALUES(NULL, 'Flange', 'Al Capone', 'Pizza', 1250);
-INSERT INTO Food VALUES(NULL, 'Escargot', 'Apple Pie', 'Dessert', 800);
-INSERT INTO Food VALUES(NULL, 'Double Felix', 'Bud Spencer', 'Pizza', 1400);
-INSERT INTO Food VALUES(NULL, 'Cthulhu�s Kitchen', 'Hamburger', 'Fastfood', 650);
-INSERT INTO Food VALUES(NULL, 'Cabooze', 'Pepsi-Cola', 'Drinks', 180);
-INSERT INTO Food VALUES(NULL, 'Balkan Beef', 'Beer', 'Drinks', 300);
-INSERT INTO Food VALUES(NULL, 'Alephant', 'Brownie', 'Dessert', 700);
+INSERT INTO Food VALUES(NULL, 'Giotto Gelato', 'Goulash', 1, 850, 1, '');
+INSERT INTO Food VALUES(NULL, 'Hey Buddha!', 'Tofu Taco', 9, 1000, 1, '');
+INSERT INTO Food VALUES(NULL, 'Isosphere', 'Coca-Cola', 10, 250, 1, '');
+INSERT INTO Food VALUES(NULL, 'Flange', 'Al Capone', 4, 1250, 1, '');
+INSERT INTO Food VALUES(NULL, 'Escargot', 'Apple Pie', 3, 800, 1, '');
+INSERT INTO Food VALUES(NULL, 'Double Felix', 'Bud Spencer', 4, 1400, 1, '');
+INSERT INTO Food VALUES(NULL, 'Cthulhu�s Kitchen', 'Hamburger', 5, 650, 1, '');
+INSERT INTO Food VALUES(NULL, 'Cabooze', 'Pepsi-Cola', 10, 180, 1, '');
+INSERT INTO Food VALUES(NULL, 'Balkan Beef', 'Beer', 10, 300, 1, '');
+INSERT INTO Food VALUES(NULL, 'Alephant', 'Brownie', 3, 700, 1, '');
 
 INSERT INTO ATable VALUES(NULL, 'Alephant', 'FOUR_SEATER', TRUE);
 INSERT INTO ATable VALUES(NULL, 'Balkan Beef', 'TWO_SEATER', FALSE);
