@@ -2,10 +2,10 @@ package model;
 
 public enum CurrencyType {
 
-	EUR(1),
-	HUF(2),
-	USD(3),
-	GBP(4);
+	EUR(0),
+	HUF(1),
+	USD(2),
+	GBP(3);
 
 	private int curr;
 
