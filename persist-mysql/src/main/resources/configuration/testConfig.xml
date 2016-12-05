@@ -37,5 +37,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="hu/uni/reman/persist/mysql/mapper/ReservationMapper.xml" />
 		<mapper resource="hu/uni/reman/persist/mysql/mapper/FoodMapper.xml" />
 		<mapper resource="hu/uni/reman/persist/mysql/mapper/OrderedFoodMapper.xml" />
+		<mapper resource="hu/uni/reman/persist/mysql/mapper/RestaurantMapper.xml" />
 	</mappers>
 </configuration>
