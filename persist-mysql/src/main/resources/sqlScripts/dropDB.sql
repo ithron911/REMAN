@@ -1,4 +1,4 @@
-DROP TABLE if Feedback;
+DROP TABLE if exists Feedback;
 DROP TABLE if exists OrderedFood;
 DROP TABLE if exists Reservation;
 DROP TABLE if exists Payment;

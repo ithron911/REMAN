@@ -108,7 +108,7 @@ public class RestaurantDAOImplTests extends SQLScriptLoadTests {
 
 	@Test
 	public void testDeleteRestaurant() throws DeleteFailedException {
-		RestaurantDao.deleteRestaurant("Isosphere");
+		RestaurantDao.deleteRestaurant("Hey Buddha!");
 	}
 
 	private void logRestaurant(Restaurant Restaurant) {
