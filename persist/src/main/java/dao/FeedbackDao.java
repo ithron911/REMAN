@@ -11,12 +11,14 @@ import model.Feedback;
 
 public interface FeedbackDao {
 
-	public void insertFeedback() throws InsertFailedException;
+	public int insertFeedback(Feedback feedback) throws InsertFailedException;
 	
 	public void updateFeedback(Feedback feedback) throws  UpdateFailedException;
 	
+	public Feedback getFeedback(int i) throws NoResultException;
+	
 	public List<Feedback> getAllFeedbacks() throws NoResultException;
 	
-	public void deleteFeedback(Feedback feedback) throws DeleteFailedException;
+	public void deleteFeedback(int i) throws DeleteFailedException;
 	
 }

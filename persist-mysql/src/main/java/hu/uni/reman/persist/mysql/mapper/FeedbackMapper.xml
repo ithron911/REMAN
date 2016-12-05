@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hu.uni.reman.persist.mysql.mapper.FeedbackMapper">
+
+<resultMap type="model.Feedback" id="FeedbackResultMap">
+	<id property="id" column="ID" />
+	<result property="date" column="Date" javaType="java.util.Date" jdbcType="DATE"/>
+	<result property="otherComment" column="OtherComment"/>
+	<result property="rating" column="Rating" javaType="model.FeedbackRatingType" jdbcType="INTEGER"
+		typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+</resultMap>
+
+
+<insert id="insertFeedback" parameterType="model.Feedback">
+	INSERT INTO Feedback(Rating, Date, OtherComment)
+		VALUES (#{rating}, #{date}, #{otherComment});
+</insert>
+
+<update id="updateFeedback" parameterType="model.Feedback">
+	UPDATE Feedback SET RestaurantName = #{restaurantName}, PaymentID = #{payment.id},
+		FoodID = #{food.id}, Currency = #{currency.curr}, DateBook = #{dateBook}, Comment = #{comment}
+		WHERE ID = #{id};
+</update>
+
+<select id="getFeedback" parameterType="int" resultMap="FeedbackResultMap">
+	SELECT * FROM Feedback WHERE id = #{id}; 
+</select>
+
+<delete id="deleteFeedback">
+	DELETE FROM Feedback where Feedback.id = #{id};
+</delete>
+</mapper>

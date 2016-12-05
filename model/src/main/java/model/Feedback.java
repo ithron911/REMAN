@@ -3,14 +3,19 @@ package model;
 import java.util.Date;
 
 public class Feedback {
-
+	private int id;
 	private FeedbackRating rating;
 	private Date date;
 	private String otherComment;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public Feedback() {
 	}
-
 	public FeedbackRating getRating() {
 		return rating;
 	}
