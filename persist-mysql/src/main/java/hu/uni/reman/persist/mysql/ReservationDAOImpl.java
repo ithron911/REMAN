@@ -22,11 +22,11 @@ public class ReservationDAOImpl implements ReservationDao {
 
 	private SqlSessionFactory sqlSessionFactory;
 
-	public ReservationDAOImpl(String configPath, String host, int port, String db, String user, String pass)
+	public ReservationDAOImpl(String configPath, String host, int port, String db, String user, String pass, String connectionUrl)
 			throws FileNotFoundException {
 		File configFile = new File(configPath);
 		InputStream inputStream = new FileInputStream(configFile);
-		String url = String.format("jdbc:mysql://%s:%s/%s?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", host, port, db);
+		String url = String.format(connectionUrl , host, port, db);
 		Properties props = new Properties();
 		props.put("driver", "com.mysql.jdbc.Driver");
 		props.put("url", url);

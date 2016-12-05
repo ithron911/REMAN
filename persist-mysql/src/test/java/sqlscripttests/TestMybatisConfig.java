@@ -18,7 +18,7 @@ public class TestMybatisConfig  extends SQLScriptLoadTests{
 	public void testLoadMyBatisConfig() throws IOException {
 		Properties props = new Properties();
 		props.put("driver", "com.mysql.jdbc.Driver");
-		props.put("url", String.format("jdbc:mysql://%s:%d/%s", HOST, PORT, DATABASE));
+		props.put("url", String.format(CONNECTION_URL , HOST, PORT, DATABASE));
 		props.put("username", USER);
 		props.put("password", PASSWORD);
 

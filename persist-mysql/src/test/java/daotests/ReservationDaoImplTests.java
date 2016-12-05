@@ -34,7 +34,7 @@ public class ReservationDaoImplTests extends SQLScriptLoadTests {
 		super.setUp();
 		try {
 			this.reservationDao =
-					new ReservationDAOImpl(MYBATIS_CONFIG, HOST, PORT, DATABASE, USER, PASSWORD);
+					new ReservationDAOImpl(MYBATIS_CONFIG, HOST, PORT, DATABASE, USER, PASSWORD, CONNECTION_URL);
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}

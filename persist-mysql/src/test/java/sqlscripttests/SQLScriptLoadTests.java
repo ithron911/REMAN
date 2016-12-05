@@ -26,6 +26,7 @@ public class SQLScriptLoadTests {
 	protected static String USER;
 	protected static String PASSWORD;
 	protected static String MYBATIS_CONFIG;
+	protected static String CONNECTION_URL;
 
 	@BeforeClass
 	public static void beforeClass() {
@@ -37,6 +38,7 @@ public class SQLScriptLoadTests {
 			USER = System.getProperty("database.user");
 			PASSWORD = System.getProperty("database.password");
 			MYBATIS_CONFIG = System.getProperty("mybatis.config");
+			CONNECTION_URL = System.getProperty("connection.url");
 		} catch (NumberFormatException ex) {
 			Assume.assumeNoException(ex);
 		}
@@ -73,7 +75,7 @@ public class SQLScriptLoadTests {
 		} catch (ClassNotFoundException e) {
 			Assume.assumeNoException(e);
 		}
-		final String connectionURL = String.format("jdbc:mysql://%s:%d/%s?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", HOST, PORT, DATABASE);
+		final String connectionURL = String.format(CONNECTION_URL, HOST, PORT, DATABASE);
 		Connection connection;
 		try {
 			connection = DriverManager.getConnection(connectionURL, USER, PASSWORD);
