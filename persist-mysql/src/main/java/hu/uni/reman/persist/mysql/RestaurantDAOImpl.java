@@ -15,6 +15,8 @@ import exceptions.InsertFailedException;
 import exceptions.NoResultException;
 import exceptions.UpdateFailedException;
 import hu.uni.reman.persist.mysql.mapper.RestaurantMapper;
+import hu.uni.reman.persist.mysql.mapper.RestaurantMapper;
+import model.Restaurant;
 import model.Restaurant;
 
 import org.apache.ibatis.session.SqlSession;
@@ -47,9 +49,8 @@ public class RestaurantDAOImpl implements RestaurantDao{
 		String name = null;
 		try {
 			RestaurantMapper.insertRestaurant(restaurant);
-
 			name = restaurant.getName();
-			if (name == null) {
+			if (name.equals("")) {
 				throw new InsertFailedException("Insertion failed!");
 			}
 		} finally {
@@ -64,12 +65,27 @@ public class RestaurantDAOImpl implements RestaurantDao{
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		RestaurantMapper RestaurantMapper = sqlSession.getMapper(RestaurantMapper.class);
 
+		boolean isRestaurantExits = false;
+		Collection<Restaurant> restaurants = RestaurantMapper.getAllRestaurants();
+		for (Restaurant res : restaurants) {
+			if (res.getName().equals(restaurant.getName())) {
+				isRestaurantExits = true;
+				break;
+			}
+
+		}
+		
+		if (isRestaurantExits == false) {
+			throw new UpdateFailedException("A Restaurant with this name does not exists:" + restaurant.getName());
+		}
 		try {
 			RestaurantMapper.updateRestaurant(restaurant);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
 	}
+	
 	@Override
 	public Collection<Restaurant> getAllRestaurants() throws NoResultException {SqlSession sqlSession = sqlSessionFactory.openSession();
 	
@@ -96,12 +112,25 @@ public class RestaurantDAOImpl implements RestaurantDao{
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		RestaurantMapper RestaurantMapper = sqlSession.getMapper(RestaurantMapper.class);
 
+		boolean isRestaurantExits = false;
+		Collection<Restaurant> restaurants = RestaurantMapper.getAllRestaurants();
+		for (Restaurant res : restaurants) {
+			if (res.getName().equals(name)) {
+				isRestaurantExits = true;
+				break;
+			}
+
+		}
+		
+		if (isRestaurantExits == false) {
+			throw new DeleteFailedException("A Restaurant with this name does not exists:" + name);
+		}
 		try {
 			RestaurantMapper.deleteRestaurant(name);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
-		
 	}
 
 	@Override
