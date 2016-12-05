@@ -1,7 +1,7 @@
 CREATE TABLE Restaurant(
 	Name VARCHAR(30) NOT NULL,
 	Founding DATE,
-	Type VARCHAR(30),
+	Type INT,
 	PRIMARY KEY ( Name )
 );
 

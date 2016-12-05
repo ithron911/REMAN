@@ -2,20 +2,20 @@ package model;
 
 public enum RestaurantType {
 	
-	FASTFOOD("fastfood"),
-	STREETFOOD("streetfood"),
-	CASUAL("casual"),
-	PUB("pub"),
-	PIZZERIA("pizzeria");
+	FASTFOOD(0),
+	STREETFOOD(1),
+	CASUAL(2),
+	PUB(3),
+	PIZZERIA(4);
 	
 
-	private String restaurantType;
+	private int restaurantType;
 
-	private RestaurantType(String restaurantType) {
+	private RestaurantType(int restaurantType) {
 		this.restaurantType = restaurantType;
 	}
 
-	public String getResturantType() {
+	public int getResturantType() {
 		return restaurantType;
 	}
 

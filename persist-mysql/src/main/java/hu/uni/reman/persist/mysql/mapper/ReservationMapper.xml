@@ -45,6 +45,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		SELECT * FROM Reservation WHERE id = #{id};
 	</select>
 
+	<select id="getAllReservations" resultMap="ReservationResultMap">
+		SELECT * FROM Reservation;
+	</select>
+
 	<select id="getPaymentByReservationId" parameterType="int"
 		resultMap="PaymentResultMap">
 		SELECT * FROM Payment WHERE id = #{PaymentId};

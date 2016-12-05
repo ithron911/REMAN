@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.Properties;
 
 import org.apache.ibatis.session.SqlSession;
@@ -88,6 +89,26 @@ public class ReservationDAOImpl implements ReservationDao {
 	}
 
 	@Override
+	public Collection<Reservation> getAllReservation() throws NoResultException {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		ReservationMapper reservationMapper = sqlSession.getMapper(ReservationMapper.class);
+		Collection<Reservation> allReservations = null;
+
+		try {
+			allReservations = reservationMapper.getAllReservations();
+
+			if (allReservations == null) {
+				throw new NoResultException("The query has no result, the table is empty!");
+			}
+
+		} finally {
+			sqlSession.close();
+		}
+
+		return allReservations;
+	}
+
+	@Override
 	public void deleteReservation(int id) throws DeleteFailedException {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		ReservationMapper reservationMapper = sqlSession.getMapper(ReservationMapper.class);
@@ -98,5 +119,4 @@ public class ReservationDAOImpl implements ReservationDao {
 			sqlSession.close();
 		}
 	}
-
 }

@@ -3,6 +3,7 @@ package daotests;
 import static org.junit.Assert.fail;
 
 import java.io.FileNotFoundException;
+import java.util.Collection;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
@@ -39,7 +40,7 @@ public class ReservationDaoImplTests extends SQLScriptLoadTests {
 			fail(ex.getMessage());
 		}
 	}
-
+/*
 	@Test()
 	public void testInsertReservation() throws InsertFailedException {
 		Reservation reservation = createCompleteReservationForInsert();
@@ -57,7 +58,7 @@ public class ReservationDaoImplTests extends SQLScriptLoadTests {
 		reservation.setComment("Test changed comment!");
 
 		reservationDao.updateReservation(reservation);
-	}
+	} */
 
 	@Test
 	public void testGetReservation() throws FileNotFoundException, NoResultException {
@@ -67,16 +68,28 @@ public class ReservationDaoImplTests extends SQLScriptLoadTests {
 		LOGGER.info("getReservation with ID: " + 1);
 		logReservation(reservation);
 	}
-
+/*
 	@Test(expected = NoResultException.class)
 	public void testGetReservationFailed() throws FileNotFoundException, NoResultException {
 		reservationDao.getReservation(-1);
 	}
 
 	@Test
+	public void testGetAllReservation() throws NoResultException {
+		Collection<Reservation> reservations= reservationDao.getAllReservation();
+
+		Assume.assumeTrue(reservations.size() == 10);
+		LOGGER.info("All reservations:");
+		for (Reservation reservation : reservations) {
+			LOGGER.info("Reservation:");
+			logReservation(reservation);
+		}
+	}
+
+	@Test
 	public void testDeleteReservation() throws DeleteFailedException {
 		reservationDao.deleteReservation(10);
-	}
+	} */
 
 	private void logReservation(Reservation reservation) {
 		LOGGER.info("Comment: " + reservation.getComment());

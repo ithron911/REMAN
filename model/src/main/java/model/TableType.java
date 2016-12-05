@@ -2,11 +2,11 @@ package model;
 
 public enum TableType {
 
-	TWO_SEATER(2),
-	THREE_SEATER(3),
-	FOUR_SEATER(4),
-	FIVE_SEATER(5),
-	SIX_SEATER(6);
+	TWO_SEATER(0),
+	THREE_SEATER(1),
+	FOUR_SEATER(2),
+	FIVE_SEATER(3),
+	SIX_SEATER(4);
 	
 	private int chairsNumber;
 	

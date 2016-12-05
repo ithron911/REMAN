@@ -1,15 +1,15 @@
 SET FOREIGN_KEY_CHECKS=0;
 
-INSERT INTO Restaurant VALUES('Alephant', '1998-02-18', 'fastfood');
-INSERT INTO Restaurant VALUES('Balkan Beef', '2000-03-15', 'streetfood');
-INSERT INTO Restaurant VALUES('Cabooze', '2014-12-10', 'pub');
-INSERT INTO Restaurant VALUES('Cthulhu�s Kitchen', '1970-08-19', 'fastfood');
-INSERT INTO Restaurant VALUES('Double Felix', '1980-05-22', 'pizzeria');
-INSERT INTO Restaurant VALUES('Escargot', '2011-12-10', 'fastfood');
-INSERT INTO Restaurant VALUES('Flange', '2015-09-20', 'pizzeria');
-INSERT INTO Restaurant VALUES('Giotto Gelato', '2000-01-01', 'casual');
-INSERT INTO Restaurant VALUES('Hey Buddha!', '2013-05-09', 'casual');
-INSERT INTO Restaurant VALUES('Isosphere', '2011-10-29', 'streetfood');
+INSERT INTO Restaurant VALUES('Alephant', '1998-02-18', 0);
+INSERT INTO Restaurant VALUES('Balkan Beef', '2000-03-15', 1);
+INSERT INTO Restaurant VALUES('Cabooze', '2014-12-10', 2);
+INSERT INTO Restaurant VALUES('Cthulhu�s Kitchen', '1970-08-19', 3);
+INSERT INTO Restaurant VALUES('Double Felix', '1980-05-22', 4);
+INSERT INTO Restaurant VALUES('Escargot', '2011-12-10', 0);
+INSERT INTO Restaurant VALUES('Flange', '2015-09-20', 1);
+INSERT INTO Restaurant VALUES('Giotto Gelato', '2000-01-01', 2);
+INSERT INTO Restaurant VALUES('Hey Buddha!', '2013-05-09', 3);
+INSERT INTO Restaurant VALUES('Isosphere', '2011-10-29', 4);
 
 INSERT INTO Food VALUES(NULL, 'Giotto Gelato', 'Goulash', 1, 850, 1, '');
 INSERT INTO Food VALUES(NULL, 'Hey Buddha!', 'Tofu Taco', 9, 1000, 1, '');
