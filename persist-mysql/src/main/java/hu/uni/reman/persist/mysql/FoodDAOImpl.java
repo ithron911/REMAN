@@ -17,9 +17,7 @@ import exceptions.InsertFailedException;
 import exceptions.NoResultException;
 import exceptions.UpdateFailedException;
 import hu.uni.reman.persist.mysql.mapper.FoodMapper;
-import hu.uni.reman.persist.mysql.mapper.ReservationMapper;
 import model.Food;
-import model.Reservation;
 
 public class FoodDAOImpl implements FoodDao {
 
@@ -38,8 +36,8 @@ public class FoodDAOImpl implements FoodDao {
 	}
 
 	@Override
-	public void insertFood(Food food) throws InsertFailedException {
-		Food existFood = getFoodById(food.getId());
+	public void insertFood(Food food) throws InsertFailedException, NoResultException {
+		Food existFood = getFoodByName(food.getName());
 		if (existFood != null) {
 			throw new InsertFailedException("Food is already exists");
 		}
@@ -54,11 +52,12 @@ public class FoodDAOImpl implements FoodDao {
 	}
 
 	@Override
-	public void updateFood(Food food) throws UpdateFailedException {
-		Food existFood = getFoodById(food.getId());
-		if (existFood == null) {
-			throw new UpdateFailedException("Food is not exists");
+	public void updateFood(Food food) throws UpdateFailedException, NoResultException {
+		if (food == null) {
+			throw new UpdateFailedException("Cant update null Food");
 		}
+		
+		getFoodById(food.getId());
 
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
@@ -68,22 +67,28 @@ public class FoodDAOImpl implements FoodDao {
 	}
 
 	@Override
-	public Food getFoodById(int id) {
+	public Food getFoodById(int id) throws NoResultException {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
 		Food food = null;
 		food = foodMapper.getFoodById(id);
 		sqlSession.commit();
 		sqlSession.close();
+		
+		if (food == null) {
+			throw new NoResultException("Food is not exists");
+		}
+		
 		return food;
 	}
 
 	@Override
-	public void deleteFood(Food food) throws DeleteFailedException {
-		Food existFood = getFoodById(food.getId());
-		if (existFood == null) {
-			throw new DeleteFailedException("Food is not exists");
+	public void deleteFood(Food food) throws DeleteFailedException, NoResultException {
+		if (food == null) {
+			throw new DeleteFailedException("Food is null");
 		}
+		
+		getFoodById(food.getId());
 		
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
@@ -113,5 +118,7 @@ public class FoodDAOImpl implements FoodDao {
 		sqlSession.close();
 		return food;
 	}
+	
+
 
 }

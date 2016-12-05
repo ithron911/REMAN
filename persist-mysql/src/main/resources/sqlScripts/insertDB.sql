@@ -22,16 +22,16 @@ INSERT INTO Food VALUES(8, 'Pepsi-Cola', 10, 180, 1, '');
 INSERT INTO Food VALUES(9, 'Beer', 10, 300, 1, '');
 INSERT INTO Food VALUES(10, 'Brownie', 3, 700, 1, '');
 
-INSERT INTO FoodSelling VALUES(1,'Alephant');
-INSERT INTO FoodSelling VALUES(2,'Balkan Beef');
-INSERT INTO FoodSelling VALUES(3,'Cabooze');
-INSERT INTO FoodSelling VALUES(4,'Cabooze');
-INSERT INTO FoodSelling VALUES(5,'Cabooze');
-INSERT INTO FoodSelling VALUES(6,'Alephant');
-INSERT INTO FoodSelling VALUES(7,'Alephant');
-INSERT INTO FoodSelling VALUES(8,'Alephant');
-INSERT INTO FoodSelling VALUES(9,'Alephant');
-INSERT INTO FoodSelling VALUES(10,'Alephant');
+INSERT INTO FoodSelling VALUES(1,1,'Alephant');
+INSERT INTO FoodSelling VALUES(2,2,'Balkan Beef');
+INSERT INTO FoodSelling VALUES(3,3,'Cabooze');
+INSERT INTO FoodSelling VALUES(4,4,'Cabooze');
+INSERT INTO FoodSelling VALUES(5,5,'Cabooze');
+INSERT INTO FoodSelling VALUES(6,6,'Alephant');
+INSERT INTO FoodSelling VALUES(7,7,'Isosphere');
+INSERT INTO FoodSelling VALUES(8,8,'Isosphere');
+INSERT INTO FoodSelling VALUES(9,9,'Isosphere');
+INSERT INTO FoodSelling VALUES(10,10,'Alephant');
 
 INSERT INTO ATable VALUES(1, 'Alephant', 'FOUR_SEATER', TRUE);
 INSERT INTO ATable VALUES(2, 'Balkan Beef', 'TWO_SEATER', FALSE);
@@ -42,7 +42,7 @@ INSERT INTO ATable VALUES(6, 'Escargot', 'FOUR_SEATER', FALSE);
 INSERT INTO ATable VALUES(7, 'Flange', 'FOUR_SEATER', FALSE);
 INSERT INTO ATable VALUES(8, 'Giotto Gelato', 'FIVE_SEATER', TRUE);
 INSERT INTO ATable VALUES(9, 'Hey Buddha!', 'SIX_SEATER', FALSE);
-INSERT INTO ATable VALUES(10, 'Alephant', 'TWO_SEATER', TRUE);
+INSERT INTO ATable VALUES(10, 'Isosphere', 'TWO_SEATER', TRUE);
 
 INSERT INTO Payment VALUES(1, 'Alephant', 0);
 INSERT INTO Payment VALUES(2, 'Balkan Beef', 1);
@@ -53,7 +53,7 @@ INSERT INTO Payment VALUES(6, 'Escargot', 1);
 INSERT INTO Payment VALUES(7, 'Flange', 2);
 INSERT INTO Payment VALUES(8, 'Giotto Gelato', 3);
 INSERT INTO Payment VALUES(9, 'Hey Buddha!', 0);
-INSERT INTO Payment VALUES(10, 'Alephant', 1);
+INSERT INTO Payment VALUES(10, 'Isosphere', 1);
 
 INSERT INTO Reservation VALUES(1, 'Alephant', 1, 2000, 0, '2016-10-10', 'Este 8');
 INSERT INTO Reservation VALUES(2, 'Balkan Beef', 2, 1200, 1, '2016-11-11', '+1 sz�k');
@@ -64,7 +64,7 @@ INSERT INTO Reservation VALUES(6, 'Escargot', 6, 1200, 1, '2016-02-02', '');
 INSERT INTO Reservation VALUES(7, 'Flange', 7, 1000, 2, '2017-10-05', 'Este 9');
 INSERT INTO Reservation VALUES(8, 'Giotto Gelato', 8, 2500, 3, '2012-09-10', 'D�l');
 INSERT INTO Reservation VALUES(9, 'Hey Buddha!', 9, 1300, 0, '2017-02-02', '+2 f�');
-INSERT INTO Reservation VALUES(10, 'Alephant', 10, 2500, 1, '2014-05-10', '');
+INSERT INTO Reservation VALUES(10, 'Isosphere', 10, 2500, 1, '2014-05-10', '');
 
 INSERT INTO OrderedFood VALUES(1,1,1);
 INSERT INTO OrderedFood VALUES(2,1,2);
@@ -80,3 +80,4 @@ INSERT INTO Feedback VALUES(2, 1, '2012-05-10', 'korte');
 INSERT INTO Feedback VALUES(3, 2, '2013-05-10', 'szilva');
 INSERT INTO Feedback VALUES(4, 3, '2014-05-10', 'eper');
 INSERT INTO Feedback VALUES(5, 4, '2015-05-10', '');
+INSERT INTO OrderedFood VALUES(8,4,1);
