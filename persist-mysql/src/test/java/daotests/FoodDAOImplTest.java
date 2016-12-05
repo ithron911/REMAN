@@ -32,5 +32,11 @@ public class FoodDAOImplTest extends SQLScriptLoadTests {
 		Food food = foodDao.getFood(1);
 		Assume.assumeNotNull(food);
 	}
+	
+	@Test
+	public void insertTest() {
+		
+	}
+	
 
 }

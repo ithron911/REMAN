@@ -9,10 +9,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		<id property="id" column="ID" />
 		<result property="name" column="Name" />
 		<result property="foodType" column="FoodType" javaType="FoodType"
-			jdbcType="INTEGER" typeHandler="FoodTypeHandler" />
+			jdbcType="INTEGER" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
 		<result property="price" column="Price" />
 		<result property="currency" column="currency" javaType="CurrencyType"
-			jdbcType="INTEGER" typeHandler="CurrencyTypeHandler" />
+			jdbcType="INTEGER" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
 		<result property="description" column="description" />
 	</resultMap>
 

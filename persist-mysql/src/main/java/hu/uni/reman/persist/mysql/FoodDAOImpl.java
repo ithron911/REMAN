@@ -10,6 +10,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.mysql.cj.api.x.Collection;
+
 import dao.FoodDao;
 import exceptions.DeleteFailedException;
 import exceptions.InsertFailedException;
@@ -37,26 +39,23 @@ public class FoodDAOImpl implements FoodDao {
 	}
 
 	@Override
-	public void insertFood() throws InsertFailedException {
-		/*
+	public void insertFood(Food food) throws InsertFailedException, NoResultException {
+		Food existFood = getFood(food.getId());
+		System.out.println(existFood);
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		ReservationMapper reservationMapper = sqlSession.getMapper(ReservationMapper.class);
+		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
 
 		int id = 0;
 		try {
-			reservationMapper.insertReservation(reservation);
+			foodMapper.insertFood(food);
 
-			id = reservation.getId();
+			id = food.getId();
 			if (id == 0) {
 				throw new InsertFailedException("Insertion failed!");
 			}
 		} finally {
 			sqlSession.close();
 		}
-
-
-		return id;
-		*/
 	}
 
 	@Override
@@ -72,7 +71,6 @@ public class FoodDAOImpl implements FoodDao {
 		Food food = null;
 
 		try {
-			System.out.println("FASZ");
 			food = foodMapper.selectFood(id);
 		
 			System.out.println(food);
