@@ -93,7 +93,7 @@ public class FeedbackDAOImplTests extends SQLScriptLoadTests {
 	public void testGetAllFeedback() throws NoResultException {
 		Collection<Feedback> feedbacks = feedbackDao.getAllFeedback();
 		
-		Assume.assumeTrue(feedbacks.size() == 10);
+		Assume.assumeTrue(feedbacks.size() == 5);
 		LOGGER.info("All feedbacks");
 		for(Feedback feedback : feedbacks) {
 			LOGGER.info("Feedback:");

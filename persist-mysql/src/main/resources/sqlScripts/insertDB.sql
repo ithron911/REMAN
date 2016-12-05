@@ -80,4 +80,3 @@ INSERT INTO Feedback VALUES(2, 1, '2012-05-10', 'korte');
 INSERT INTO Feedback VALUES(3, 2, '2013-05-10', 'szilva');
 INSERT INTO Feedback VALUES(4, 3, '2014-05-10', 'eper');
 INSERT INTO Feedback VALUES(5, 4, '2015-05-10', '');
-INSERT INTO OrderedFood VALUES(8,4,1);
