@@ -7,14 +7,20 @@ CREATE TABLE Restaurant(
 
 CREATE TABLE Food(
 	ID INT NOT NULL AUTO_INCREMENT,
-	RestaurantName VARCHAR(30),
     Name VARCHAR(100) NOT NULL,
     FoodType INT,
     Price INT,
     currency INT,
     description VARCHAR(100),
-    PRIMARY KEY ( ID ),
-	FOREIGN KEY ( RestaurantName ) REFERENCES Restaurant(Name)
+    PRIMARY KEY ( ID )
+);
+
+CREATE TABLE FoodSelling(
+	foodId INT,
+	restaurantId VARCHAR(30),
+	primary key (foodId,restaurantId),
+	foreign key (foodId) REFERENCES Food(ID),
+	foreign key (restaurantId) REFERENCES Restaurant(Name)
 );
 
 CREATE TABLE ATable(
@@ -39,13 +45,19 @@ CREATE TABLE Reservation(
     ID INT NOT NULL AUTO_INCREMENT,
 	RestaurantName VARCHAR(30),
 	PaymentID INT,
-	FoodID INT,
 	Price INT,
 	Currency INT,
 	DateBook DATE,
 	Comment Varchar(200),
 	PRIMARY KEY ( ID ),
 	FOREIGN KEY ( RestaurantName ) REFERENCES Restaurant(Name),
-	FOREIGN KEY ( FoodID) REFERENCES Food(ID),
 	FOREIGN KEY ( PaymentID ) REFERENCES Payment(ID)
-);					
+);
+
+CREATE TABLE OrderedFood(
+	reservationId INT,
+	foodId INT,
+	primary key (foodId,reservationId),
+	foreign key (foodId) REFERENCES Food(ID),
+	foreign key (reservationId) REFERENCES Reservation(ID)
+);
