@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hu.uni.reman.persist.mysql.mapper.RestaurantMapper">
+
+	<resultMap type="Restaurant" id="RestaurantResultMap">
+		<id property="name" column="Name" />
+		<result property="founding" column="Founding" javaType="java.util.Date"
+			jdbcType="DATE" />
+		<result property="type" column="Type" javaType="RestaurantType"
+			jdbcType="INTEGER" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
+	</resultMap>
+
+	<insert id="insertRestaurant" parameterType="Restaurant" useGeneratedKeys="true" keyProperty="id"  keyColumn="id">
+		INSERT INTO Restaurant(Name, Founding, Type)
+		VALUES (#{Name}, #{founding},
+		#{RestaurantType.restaurantType});
+		<selectKey keyProperty="Name" resultType="varchar" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+	</insert>
+
+	<update id="updateRestaurant" parameterType="Restaurant">
+		UPDATE Restaurant SET Name = #{Name}, Founding = #(Founding), Type = #(Type));
+	</update>
+
+	<select id="getRestaurant" parameterType="varchar" resultMap="RestaurantResultMap">
+		SELECT * FROM Restaurant WHERE Name = #{Name};
+	</select>
+
+	<select id="getAllRestaurants" resultMap="RestaurantResultMap">
+		SELECT * FROM Restaurant;
+	</select>
+
+
+	<delete id="deleteRestaurant">
+		DELETE FROM Restaurant where Restaurant.Name = #{name};
+	</delete>
+</mapper>
