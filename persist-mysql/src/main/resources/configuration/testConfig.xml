@@ -3,6 +3,46 @@
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
+	<typeAliases>
+		<typeAlias alias="CountyEnum" type="model.CountyEnum" />
+		<typeAlias alias="CurrencyType" type="model.CurrencyType" />
+		<typeAlias alias="Feedback" type="model.Feedback" />
+		<typeAlias alias="FeedbackRating" type="model.FeedbackRating" />
+		<typeAlias alias="Food" type="model.Food" />
+		<typeAlias alias="FoodType" type="model.FoodType" />
+		<typeAlias alias="Payment" type="model.Payment" />
+		<typeAlias alias="PaymentType" type="model.PaymentType" />
+		<typeAlias alias="Reservation" type="model.Reservation" />
+		<typeAlias alias="Restaurant" type="model.Restaurant" />
+		<typeAlias alias="RestaurantType" type="model.RestaurantType" />
+		<typeAlias alias="Table" type="model.Table" />
+		<typeAlias alias="TableType" type="model.TableType" />
+
+		<typeAlias alias="CurrencyTypeHandler"
+			type="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
+		<typeAlias alias="FoodTypeHandler"
+			type="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
+		<typeAlias alias="PaymentTypeHandler"
+			type="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
+		<typeAlias alias="RestaurantTypeHandler"
+			type="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
+		<typeAlias alias="TableTypeHandler"
+			type="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
+	</typeAliases>
+	<typeHandlers>
+		<typeHandler handler="CurrencyTypeHandler" javaType="CurrencyType"
+			jdbcType="INTEGER" />
+		<typeHandler handler="FoodTypeHandler" javaType="FoodType"
+			jdbcType="INTEGER" />
+		<typeHandler handler="PaymentTypeHandler" javaType="PaymentType"
+			jdbcType="INTEGER" />
+		<typeHandler handler="RestaurantTypeHandler" javaType="RestaurantType"
+			jdbcType="INTEGER" />
+		<typeHandler handler="TableTypeHandler" javaType="TableType"
+			jdbcType="INTEGER" />
+	</typeHandlers>
+
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />

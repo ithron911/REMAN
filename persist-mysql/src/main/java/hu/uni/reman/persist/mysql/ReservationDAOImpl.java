@@ -26,7 +26,7 @@ public class ReservationDAOImpl implements ReservationDao {
 			throws FileNotFoundException {
 		File configFile = new File(configPath);
 		InputStream inputStream = new FileInputStream(configFile);
-		String url = String.format("jdbc:mysql://%s:%s/%s?allowMultiQueries=true", host, port, db);
+		String url = String.format("jdbc:mysql://%s:%s/%s?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", host, port, db);
 		Properties props = new Properties();
 		props.put("driver", "com.mysql.jdbc.Driver");
 		props.put("url", url);

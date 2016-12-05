@@ -73,7 +73,7 @@ public class SQLScriptLoadTests {
 		} catch (ClassNotFoundException e) {
 			Assume.assumeNoException(e);
 		}
-		final String connectionURL = String.format("jdbc:mysql://%s:%d/%s", HOST, PORT, DATABASE);
+		final String connectionURL = String.format("jdbc:mysql://%s:%d/%s?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", HOST, PORT, DATABASE);
 		Connection connection;
 		try {
 			connection = DriverManager.getConnection(connectionURL, USER, PASSWORD);

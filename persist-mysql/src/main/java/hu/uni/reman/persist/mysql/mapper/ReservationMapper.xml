@@ -5,49 +5,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 
 <mapper namespace="hu.uni.reman.persist.mysql.mapper.ReservationMapper">
 
-<resultMap type="model.Reservation" id="ReservationResultMap">
-	<id property="id" column="ID" />
-	<result property="dateBook" column="DateBook" javaType="java.util.Date" jdbcType="DATE"/>
-	<result property="price" column="Price"/>
-	<result property="currency" column="Currency" javaType="model.CurrencyType" jdbcType="INTEGER"
-		typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
-	<result property="comment" column="Comment"/>
-	<result property="restaurantName" column="RestaurantName"/>
-	<association property="payment" column="PaymentId" javaType="model.Payment"
-	 select="getPaymentByReservationId"/>
-	<collection property="tables" column="restaurantName" select="selectTablesOfRestaurant"/>
-</resultMap>
+	<resultMap type="Reservation" id="ReservationResultMap">
+		<id property="id" column="ID" />
+		<result property="dateBook" column="DateBook" javaType="java.util.Date"
+			jdbcType="DATE" />
+		<result property="price" column="Price" />
+		<result property="currency" column="Currency" javaType="CurrencyType"
+			jdbcType="INTEGER" typeHandler="CurrencyTypeHandler" />
+		<result property="comment" column="Comment" />
+		<result property="restaurantName" column="RestaurantName" />
+		<association property="payment" column="PaymentId"
+			javaType="model.Payment" select="getPaymentByReservationId" />
+		<collection property="tables" column="restaurantName"
+			select="selectTablesOfRestaurant" />
+	</resultMap>
 
-<resultMap type="model.Payment" id="PaymentResultMap">
-<id property="id" column="ID"/>
-<result property="paymentType" column="PaymentType" javaType="model.PaymentType"
-			jdbcType="VARCHAR" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
-</resultMap>
+	<resultMap type="Payment" id="PaymentResultMap">
+		<id property="id" column="ID" />
+		<result property="paymentType" column="PaymentType" javaType="PaymentType"
+			jdbcType="INTEGER" typeHandler="PaymentTypeHandler" />
+	</resultMap>
 
-<insert id="insertReservation" parameterType="model.Reservation">
-	INSERT INTO Reservation(RestaurantName, PaymentID, FoodID, Currency, DateBook, Comment)
-		VALUES (#{restaurantName}, #{payment.id}, #{food.id}, #{currency.curr}, #{dateBook}, #{comment});
-</insert>
+	<insert id="insertReservation" parameterType="Reservation">
+		INSERT INTO Reservation(RestaurantName, PaymentID, FoodID, Currency,
+		DateBook, Comment)
+		VALUES (#{restaurantName}, #{payment.id},
+		#{food.id}, #{currency.curr}, #{dateBook}, #{comment});
+	</insert>
 
-<update id="updateReservation" parameterType="model.Reservation">
-	UPDATE Reservation SET RestaurantName = #{restaurantName}, PaymentID = #{payment.id},
-		FoodID = #{food.id}, Currency = #{currency.curr}, DateBook = #{dateBook}, Comment = #{comment}
+	<update id="updateReservation" parameterType="Reservation">
+		UPDATE Reservation SET RestaurantName = #{restaurantName}, PaymentID =
+		#{payment.id},
+		FoodID = #{food.id}, Currency = #{currency.curr},
+		DateBook = #{dateBook}, Comment = #{comment}
 		WHERE ID = #{id};
-</update>
+	</update>
 
-<select id="getReservation" parameterType="int" resultMap="ReservationResultMap">
-	SELECT * FROM Reservation WHERE id = #{id}; 
-</select>
+	<select id="getReservation" parameterType="int" resultMap="ReservationResultMap">
+		SELECT * FROM Reservation WHERE id = #{id};
+	</select>
 
-<select id="getPaymentByReservationId" parameterType="int" resultMap="PaymentResultMap">
-	SELECT * FROM Payment WHERE id = #{PaymentId};
-</select>
+	<select id="getPaymentByReservationId" parameterType="int"
+		resultMap="PaymentResultMap">
+		SELECT * FROM Payment WHERE id = #{PaymentId};
+	</select>
 
-<select id="selectTablesOfRestaurant" parameterType="java.lang.String" resultType="model.Table">
-	SELECT * FROM ATable WHERE restaurantName = #{restaurantName};
-</select>
+	<select id="selectTablesOfRestaurant" parameterType="java.lang.String"
+		resultType="Table">
+		SELECT * FROM ATable WHERE restaurantName = #{restaurantName};
+	</select>
 
-<delete id="deleteReservation">
-	DELETE FROM Reservation where Reservation.id = #{id};
-</delete>
+	<delete id="deleteReservation">
+		DELETE FROM Reservation where Reservation.id = #{id};
+	</delete>
 </mapper>
