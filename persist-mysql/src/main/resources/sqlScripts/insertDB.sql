@@ -22,16 +22,16 @@ INSERT INTO Food VALUES(8, 'Pepsi-Cola', 10, 180, 1, '');
 INSERT INTO Food VALUES(9, 'Beer', 10, 300, 1, '');
 INSERT INTO Food VALUES(10, 'Brownie', 3, 700, 1, '');
 
-INSERT INTO FoodSelling VALUES(1,'Alephant');
-INSERT INTO FoodSelling VALUES(2,'Balkan Beef');
-INSERT INTO FoodSelling VALUES(3,'Cabooze');
-INSERT INTO FoodSelling VALUES(4,'Cabooze');
-INSERT INTO FoodSelling VALUES(5,'Cabooze');
-INSERT INTO FoodSelling VALUES(6,'Alephant');
-INSERT INTO FoodSelling VALUES(7,'Isosphere');
-INSERT INTO FoodSelling VALUES(8,'Isosphere');
-INSERT INTO FoodSelling VALUES(9,'Isosphere');
-INSERT INTO FoodSelling VALUES(10,'Alephant');
+INSERT INTO FoodSelling VALUES(1,1,'Alephant');
+INSERT INTO FoodSelling VALUES(2,2,'Balkan Beef');
+INSERT INTO FoodSelling VALUES(3,3,'Cabooze');
+INSERT INTO FoodSelling VALUES(4,4,'Cabooze');
+INSERT INTO FoodSelling VALUES(5,5,'Cabooze');
+INSERT INTO FoodSelling VALUES(6,6,'Alephant');
+INSERT INTO FoodSelling VALUES(7,7,'Isosphere');
+INSERT INTO FoodSelling VALUES(8,8,'Isosphere');
+INSERT INTO FoodSelling VALUES(9,9,'Isosphere');
+INSERT INTO FoodSelling VALUES(10,10,'Alephant');
 
 INSERT INTO ATable VALUES(1, 'Alephant', 'FOUR_SEATER', TRUE);
 INSERT INTO ATable VALUES(2, 'Balkan Beef', 'TWO_SEATER', FALSE);

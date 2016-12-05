@@ -16,9 +16,10 @@ CREATE TABLE if not exists Food(
 );
 
 CREATE TABLE if not exists FoodSelling(
+	id INT NOT NULL AUTO_INCREMENT,
 	foodId INT,
 	restaurantId VARCHAR(30),
-	primary key (foodId,restaurantId),
+	primary key (id),
 	foreign key (foodId) REFERENCES Food(ID),
 	foreign key (restaurantId) REFERENCES Restaurant(Name)
 );
