@@ -1,4 +1,4 @@
-package sqlscripttests;
+package daotests;
 
 import java.io.FileNotFoundException;
 
@@ -7,25 +7,30 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dao.FoodDao;
+import exceptions.NoResultException;
 import hu.uni.reman.persist.mysql.FoodDAOImpl;
+import model.Food;
+import model.Reservation;
+import sqlscripttests.SQLScriptLoadTests;
 
 public class FoodDAOImplTest extends SQLScriptLoadTests {
 
-	private FoodDao dao;
+	private FoodDao foodDao;
 	
 	@Before
 	public void setUp(){
 		super.setUp();
 		try {
-			this.dao = new FoodDAOImpl(MYBATIS_CONFIG, HOST, PORT, DATABASE, USER, PASSWORD);
+			this.foodDao = new FoodDAOImpl(MYBATIS_CONFIG, HOST, PORT, DATABASE, USER, PASSWORD, CONNECTION_URL);
 		} catch (FileNotFoundException e) {
 			Assume.assumeNoException(e);
 		}
 	}
 	
 	@Test
-	public void FoodDAOImplTest() {
-		
+	public void getTest() throws NoResultException {
+		Food food = foodDao.getFood(1);
+		Assume.assumeNotNull(food);
 	}
 
 }

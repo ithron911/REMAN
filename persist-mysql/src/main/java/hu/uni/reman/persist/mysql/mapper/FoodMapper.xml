@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hu.uni.reman.persist.mysql.mapper.FoodMapper">
+
+	<resultMap type="Food" id="FoodResultMap">
+		<id property="id" column="ID" />
+		<result property="name" column="Name" />
+		<result property="foodType" column="FoodType" javaType="FoodType"
+			jdbcType="INTEGER" typeHandler="FoodTypeHandler" />
+		<result property="price" column="Price" />
+		<result property="currency" column="currency" javaType="CurrencyType"
+			jdbcType="INTEGER" typeHandler="CurrencyTypeHandler" />
+		<result property="description" column="description" />
+	</resultMap>
+
+	<select id="selectFoods" resultMap="FoodResultMap">
+		SELECT * FROM food;
+	</select>
+
+	<select id="selectFood" parameterType="int" resultType="Food" resultMap="FoodResultMap">
+		SELECT * FROM food WHERE id = #{id};
+	</select>
+</mapper>
