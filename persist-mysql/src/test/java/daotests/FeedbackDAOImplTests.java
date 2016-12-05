@@ -31,7 +31,7 @@ public class FeedbackDAOImplTests {
 
 	private FeedbackDao feedbackDao;
 
-	@Before
+	/*@Before
 	public void setUp() {
 		try {
 			this.feedbackDao =
@@ -40,6 +40,7 @@ public class FeedbackDAOImplTests {
 			fail(ex.getMessage());
 		}
 	}
+	*/
 
 	@Test()
 	public void testInsertFeedback() throws InsertFailedException {
