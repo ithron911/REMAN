@@ -119,7 +119,6 @@ public class ReservationDaoImplTests extends SQLScriptLoadTests {
 
 	private Reservation createReservationForInsert(Food food, Payment payment) {
 		Reservation reservation = new Reservation();
-		reservation.setId(1);
 		reservation.setComment("");
 		reservation.setCurrency(CurrencyType.EUR);
 		reservation.setDateBook(new Date());
