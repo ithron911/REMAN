@@ -1,7 +1,7 @@
-DROP TABLE OrderedFood;
-DROP TABLE Reservation;
-DROP TABLE Payment;
-DROP TABLE ATable;
-DROP TABLE FoodSelling;
-DROP TABLE Food;
-DROP TABLE Restaurant;
+DROP TABLE if exists OrderedFood;
+DROP TABLE if exists Reservation;
+DROP TABLE if exists Payment;
+DROP TABLE if exists ATable;
+DROP TABLE if exists FoodSelling;
+DROP TABLE if exists Food;
+DROP TABLE if exists Restaurant;

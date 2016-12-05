@@ -9,9 +9,9 @@ import exceptions.UpdateFailedException;
 import model.Food;
 
 public interface FoodDao {
-	public void insertFood(Food food) throws InsertFailedException, NoResultException;
+	public void insertFood(Food food) throws InsertFailedException;
 
-	public void updateFood(Food food) throws UpdateFailedException, NoResultException;
+	public void updateFood(Food food) throws UpdateFailedException;
 
 	public Food getFoodById(int id) ;
 	

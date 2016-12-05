@@ -38,7 +38,7 @@ public class FoodDAOImpl implements FoodDao {
 	}
 
 	@Override
-	public void insertFood(Food food) throws InsertFailedException, NoResultException {
+	public void insertFood(Food food) throws InsertFailedException {
 		Food existFood = getFoodById(food.getId());
 		if (existFood != null) {
 			throw new InsertFailedException("Food is already exists");
@@ -47,16 +47,14 @@ public class FoodDAOImpl implements FoodDao {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
 
-		try {
-			foodMapper.insertFood(food);
+		foodMapper.insertFood(food);
 		
-		} finally {
-			sqlSession.close();
-		}
+		sqlSession.commit();
+		sqlSession.close();
 	}
 
 	@Override
-	public void updateFood(Food food) throws UpdateFailedException, NoResultException {
+	public void updateFood(Food food) throws UpdateFailedException {
 		Food existFood = getFoodById(food.getId());
 		if (existFood == null) {
 			throw new UpdateFailedException("Food is not exists");
@@ -65,6 +63,7 @@ public class FoodDAOImpl implements FoodDao {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
 		foodMapper.updateFood(food);
+		sqlSession.commit();
 		sqlSession.close();
 	}
 
@@ -74,6 +73,7 @@ public class FoodDAOImpl implements FoodDao {
 		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
 		Food food = null;
 		food = foodMapper.getFoodById(id);
+		sqlSession.commit();
 		sqlSession.close();
 		return food;
 	}
@@ -88,6 +88,7 @@ public class FoodDAOImpl implements FoodDao {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
 		foodMapper.deleteFood(food.getId());
+		sqlSession.commit();
 		sqlSession.close();
 	}
 
@@ -97,6 +98,7 @@ public class FoodDAOImpl implements FoodDao {
 		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
 		Food food = null;
 		food = foodMapper.getFoodByName(name);
+		sqlSession.commit();
 		sqlSession.close();
 		return food;
 	}
@@ -107,6 +109,7 @@ public class FoodDAOImpl implements FoodDao {
 		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
 		Collection<Food> food = null;
 		food = foodMapper.getAllFood();
+		sqlSession.commit();
 		sqlSession.close();
 		return food;
 	}

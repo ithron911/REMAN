@@ -35,9 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		SELECT * FROM Food WHERE name = #{name};
 	</select>
 	
-	<delete id="deleteFood" parameterType="int">
-		delete from OrderedFood where foodId = #{id}; 
-		delete from FoodSelling where foodId = #{id}; 
+	<delete id="deleteFood" parameterType="int"> 
 		delete from Food where ID = #{id}; 
 	</delete>
 	
