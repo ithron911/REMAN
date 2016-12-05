@@ -66,12 +66,12 @@ INSERT INTO Reservation VALUES(8, 'Giotto Gelato', 8, 2500, 3, '2012-09-10', 'Dï
 INSERT INTO Reservation VALUES(9, 'Hey Buddha!', 9, 1300, 0, '2017-02-02', '+2 fï¿½');
 INSERT INTO Reservation VALUES(10, 'Isosphere', 10, 2500, 1, '2014-05-10', '');
 
-INSERT INTO OrderedFood VALUES(1,1);
-INSERT INTO OrderedFood VALUES(1,2);
-INSERT INTO OrderedFood VALUES(1,3);
-INSERT INTO OrderedFood VALUES(2,3);
-INSERT INTO OrderedFood VALUES(3,3);
-INSERT INTO OrderedFood VALUES(4,4);
-INSERT INTO OrderedFood VALUES(4,2);
-INSERT INTO OrderedFood VALUES(4,1);
+INSERT INTO OrderedFood VALUES(1,1,1);
+INSERT INTO OrderedFood VALUES(2,1,2);
+INSERT INTO OrderedFood VALUES(3,1,3);
+INSERT INTO OrderedFood VALUES(4,2,3);
+INSERT INTO OrderedFood VALUES(5,3,3);
+INSERT INTO OrderedFood VALUES(6,4,4);
+INSERT INTO OrderedFood VALUES(7,4,2);
+INSERT INTO OrderedFood VALUES(8,4,1);
 

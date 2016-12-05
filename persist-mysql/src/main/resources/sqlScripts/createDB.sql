@@ -55,9 +55,10 @@ CREATE TABLE if not exists Reservation(
 );
 
 CREATE TABLE if not exists OrderedFood(
+	id INT NOT NULL AUTO_INCREMENT,
 	reservationId INT,
 	foodId INT,
-	primary key (foodId,reservationId),
+	primary key (id),
 	foreign key (foodId) REFERENCES Food(ID),
 	foreign key (reservationId) REFERENCES Reservation(ID)
 );
