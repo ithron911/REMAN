@@ -24,10 +24,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 	</insert>
 
 	<select id="selectFoods" resultMap="FoodResultMap">
-		SELECT * FROM food;
+		SELECT * FROM Food;
 	</select>
 
 	<select id="selectFood" parameterType="int" resultType="Food" resultMap="FoodResultMap">
-		SELECT * FROM food WHERE id = #{id};
+		SELECT * FROM Food WHERE id = #{id};
 	</select>
 </mapper>
