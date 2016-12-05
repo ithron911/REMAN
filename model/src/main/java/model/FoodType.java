@@ -2,17 +2,17 @@ package model;
 
 public enum FoodType {
 
-	Main(1),
-	Soup(2),
-	Breakfast(3),
-	Dessert(4),		
-	Pizza(5),
-	Fastfood(6),
-	Dish(7),
-	Garnish(8),
-	Salads(9),
-	Vegetarian(10),
-	Drinks(11);
+	Main(0),
+	Soup(1),
+	Breakfast(2),
+	Dessert(3),		
+	Pizza(4),
+	Fastfood(5),
+	Dish(6),
+	Garnish(7),
+	Salads(8),
+	Vegetarian(9),
+	Drinks(10);
 
 	private int type;
 

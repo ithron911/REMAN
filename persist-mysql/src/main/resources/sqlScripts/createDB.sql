@@ -8,10 +8,12 @@ CREATE TABLE Restaurant(
 CREATE TABLE Food(
 	ID INT NOT NULL AUTO_INCREMENT,
 	RestaurantName VARCHAR(30),
-    	Name VARCHAR(100) NOT NULL,
-    	FoodType VARCHAR(50),
-    	Price INT,
-    	PRIMARY KEY ( ID ),
+    Name VARCHAR(100) NOT NULL,
+    FoodType INT,
+    Price INT,
+    currency INT,
+    description VARCHAR(100),
+    PRIMARY KEY ( ID ),
 	FOREIGN KEY ( RestaurantName ) REFERENCES Restaurant(Name)
 );
 
