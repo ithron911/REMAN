@@ -18,6 +18,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="RestaurantType" type="model.RestaurantType" />
 		<typeAlias alias="Table" type="model.Table" />
 		<typeAlias alias="TableType" type="model.TableType" />
+		<typeAlias alias="OrderedFood" type="model.OrderedFood"/>
 	</typeAliases>
 
 	<environments default="development">
@@ -36,5 +37,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="hu/uni/reman/persist/mysql/mapper/ReservationMapper.xml" />
 		<mapper resource="hu/uni/reman/persist/mysql/mapper/FoodMapper.xml" />
 		<mapper resource="hu/uni/reman/persist/mysql/mapper/FeedbackMapper.xml" />
+		<mapper resource="hu/uni/reman/persist/mysql/mapper/OrderedFoodMapper.xml" />
+		<mapper resource="hu/uni/reman/persist/mysql/mapper/RestaurantMapper.xml" />
 	</mappers>
 </configuration>

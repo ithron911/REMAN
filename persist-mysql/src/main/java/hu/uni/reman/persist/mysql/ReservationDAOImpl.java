@@ -10,7 +10,6 @@ import java.util.Properties;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.log4j.Logger;
 
 import dao.ReservationDao;
 import exceptions.DeleteFailedException;
@@ -23,8 +22,6 @@ import model.Reservation;
 public class ReservationDAOImpl implements ReservationDao {
 
 	private SqlSessionFactory sqlSessionFactory;
-
-	Logger LOGGER = Logger.getLogger(ReservationDAOImpl.class);
 
 	public ReservationDAOImpl(String configPath, String host, int port, String db, String user, String pass, String connectionUrl)
 			throws FileNotFoundException {
@@ -52,6 +49,7 @@ public class ReservationDAOImpl implements ReservationDao {
 				}
 			}
 			reservationMapper.insertReservation(reservation);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
@@ -77,6 +75,7 @@ public class ReservationDAOImpl implements ReservationDao {
 		}
 		try {
 			reservationMapper.updateReservation(reservation);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
@@ -94,6 +93,7 @@ public class ReservationDAOImpl implements ReservationDao {
 			if (reservation == null) {
 				throw new NoResultException("The query has no result with id: " + id);
 			}
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
@@ -114,6 +114,7 @@ public class ReservationDAOImpl implements ReservationDao {
 				throw new NoResultException("The query has no result, the table is empty!");
 			}
 
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
@@ -141,6 +142,7 @@ public class ReservationDAOImpl implements ReservationDao {
 
 		try {
 			reservationMapper.deleteReservation(id);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}

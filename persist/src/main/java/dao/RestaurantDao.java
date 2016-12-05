@@ -1,6 +1,6 @@
 package dao;
 
-import java.util.List;
+import java.util.Collection;
 
 import exceptions.DeleteFailedException;
 import exceptions.InsertFailedException;
@@ -10,12 +10,14 @@ import model.Restaurant;
 
 public interface RestaurantDao {
 
-	public void insertRestaurant() throws InsertFailedException;
+	public void insertRestaurant(Restaurant restaurant) throws InsertFailedException;
 	
 	public void updateRestaurant(Restaurant restaurant) throws  UpdateFailedException;
 	
-	public List<Restaurant> getAllRestaurants() throws NoResultException;
+	public Collection<Restaurant> getAllRestaurants() throws NoResultException;
 	
-	public void deleteRestaurant(Restaurant restaurant) throws DeleteFailedException;
+	public Restaurant getRestaurant(String name) throws NoResultException;
+	
+	public void deleteRestaurant(String name) throws DeleteFailedException;
 	
 }

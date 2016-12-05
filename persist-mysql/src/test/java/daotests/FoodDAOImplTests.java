@@ -3,6 +3,7 @@ package daotests;
 import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
+import java.util.Collection;
 
 import org.junit.Assume;
 import org.junit.Before;
@@ -11,7 +12,6 @@ import org.junit.Test;
 import dao.FoodDao;
 import exceptions.DeleteFailedException;
 import exceptions.InsertFailedException;
-import exceptions.NoResultException;
 import exceptions.UpdateFailedException;
 import hu.uni.reman.persist.mysql.FoodDAOImpl;
 import model.CurrencyType;
@@ -34,13 +34,17 @@ public class FoodDAOImplTests extends SQLScriptLoadTests {
 	}
 
 	@Test
-	public void testInsertFood() throws InsertFailedException, NoResultException {
+	public void testInsertFood() throws InsertFailedException {
+		int oldSize = foodDao.getAllFood().size();
 		Food food = createFoodWithoutId();
 		foodDao.insertFood(food);
+		
+		int newSize = foodDao.getAllFood().size();
+		assertNotEquals(oldSize, newSize);
 	}
 
 	@Test
-	public void testUpdateFood() throws UpdateFailedException, NoResultException {
+	public void testUpdateFood() throws UpdateFailedException {
 		Food expectedFood = createFoodWithoutId();
 		expectedFood.setId(1);
 		foodDao.updateFood(expectedFood);
@@ -51,7 +55,7 @@ public class FoodDAOImplTests extends SQLScriptLoadTests {
 	}
 
 	@Test
-	public void testGetFood() throws NoResultException {
+	public void testGetFood() {
 		Food food = foodDao.getFoodById(1);
 		Assume.assumeNotNull(food);
 	}
@@ -59,20 +63,32 @@ public class FoodDAOImplTests extends SQLScriptLoadTests {
 	@Test
 	public void testDeleteFood() throws DeleteFailedException {
 		/*
+		int oldSize = foodDao.getAllFood().size();
+		
 		Food food = createFoodWithoutId();
 		food.setId(1);
 		foodDao.deleteFood(food);
+		
+		int newSize = foodDao.getAllFood().size();
+		assertNotEquals(oldSize, newSize);
 		*/
 	}
 
 	@Test
 	public void testGetFoodByName() {
-		foodDao.getFoodByName("Test");
+		Food expectedFood = foodDao.getFoodById(2);
+		
+		Food actualFood = foodDao.getFoodByName("Tofu Taco");
+		
+		assertEquals(expectedFood, actualFood);
 	}
 
 	@Test
 	public void testGetAllFood() {
-		foodDao.getAllFood();
+		Collection<Food> foodList = foodDao.getAllFood();
+		int expectedLength = 10;
+		
+		assertEquals(expectedLength, foodList.size());
 	}
 
 	private Food createFoodWithoutId() {
