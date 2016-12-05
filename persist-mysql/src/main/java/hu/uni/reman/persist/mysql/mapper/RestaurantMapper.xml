@@ -6,28 +6,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 <mapper namespace="hu.uni.reman.persist.mysql.mapper.RestaurantMapper">
 
 	<resultMap type="Restaurant" id="RestaurantResultMap">
-		<id property="name" column="Name" />
+		<id property="name" column="Name" javaType="java.lang.String"/>
 		<result property="founding" column="Founding" javaType="java.util.Date"
 			jdbcType="DATE" />
 		<result property="type" column="Type" javaType="RestaurantType"
 			jdbcType="INTEGER" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
 	</resultMap>
 
-	<insert id="insertRestaurant" parameterType="Restaurant" useGeneratedKeys="true" keyProperty="name"  keyColumn="name">
+	<insert id="insertRestaurant" parameterType="Restaurant">
 		INSERT INTO Restaurant(Name, Founding, Type)
-		VALUES (#{Name}, #{founding},
-		#{RestaurantType.restaurantType});
-		<selectKey keyProperty="Name" resultType="java.lang.String" order="AFTER">
-            SELECT LAST_INSERT_ID();
-        </selectKey>
+		VALUES (#{name},#{founding},#{type.restaurantType});
 	</insert>
 
-	<update id="updateRestaurant" parameterType="Restaurant">
-		UPDATE Restaurant SET Name = #{Name}, Founding = #(Founding), Type = #(Type));
+	<update id="updateRestaurant" parameterType="Restaurant"  keyProperty="id"  keyColumn="id">
+		UPDATE Restaurant SET Founding = #{founding}, Type = #{type.restaurantType} WHERE Name = #{name} ;
 	</update>
 
 	<select id="getRestaurant" parameterType="java.lang.String" resultMap="RestaurantResultMap">
-		SELECT * FROM Restaurant WHERE Name = #{Name};
+		SELECT * FROM Restaurant WHERE Name = #{name};
 	</select>
 
 	<select id="getAllRestaurants" resultMap="RestaurantResultMap">

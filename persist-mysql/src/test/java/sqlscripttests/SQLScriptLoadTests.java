@@ -39,6 +39,7 @@ public class SQLScriptLoadTests {
 			PASSWORD = System.getProperty("database.password");
 			MYBATIS_CONFIG = System.getProperty("mybatis.config");
 			CONNECTION_URL = System.getProperty("connection.url");
+		//	CONNECTION_URL = String.format("jdbc:mysql://%s:%d/%s?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", HOST, PORT, DATABASE);
 		} catch (NumberFormatException ex) {
 			Assume.assumeNoException(ex);
 		}

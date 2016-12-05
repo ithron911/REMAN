@@ -40,25 +40,26 @@ public class RestaurantDAOImplTests extends SQLScriptLoadTests {
 
 	@Test
 	public void testInsertRestaurant() throws InsertFailedException {
-		Restaurant Restaurant = createCompleteRestaurantForInsert();
+		Restaurant restaurant = createCompleteRestaurantForInsert();
+		restaurant.setName("teszt");
 
-		RestaurantDao.insertRestaurant(Restaurant);
+		RestaurantDao.insertRestaurant(restaurant);
 
 	}
 
 	@Test(expected = InsertFailedException.class)
 	public void testInsertRestaurantFail() throws InsertFailedException {
-		Restaurant Restaurant = createCompleteRestaurantForInsert();
-		Restaurant.setName("Teszt");
+		Restaurant restaurant = createCompleteRestaurantForInsert();
+		restaurant.setName("");
 
-		RestaurantDao.insertRestaurant(Restaurant);
+		RestaurantDao.insertRestaurant(restaurant);
 		
 
 	}
 
 	@Test
 	public void testUpdateRestaurant() throws NoResultException, UpdateFailedException {
-		Restaurant Restaurant = RestaurantDao.getRestaurant("Teszt");
+		Restaurant Restaurant = RestaurantDao.getRestaurant("Cabooze");
 		logRestaurant(Restaurant);
 
 		RestaurantDao.updateRestaurant(Restaurant);
@@ -66,19 +67,19 @@ public class RestaurantDAOImplTests extends SQLScriptLoadTests {
 
 	@Test(expected = UpdateFailedException.class)
 	public void testUpdateRestaurantFail() throws NoResultException, UpdateFailedException {
-		Restaurant Restaurant = RestaurantDao.getRestaurant("Teszt0");
+		Restaurant Restaurant = RestaurantDao.getRestaurant("Cabooze");
 		logRestaurant(Restaurant);
-		Restaurant.setName("Teszt0");
+		Restaurant.setName(null);
 
 		RestaurantDao.updateRestaurant(Restaurant);
 	}
 
 	@Test
 	public void testGetRestaurant() throws FileNotFoundException, NoResultException {
-		Restaurant Restaurant = RestaurantDao.getRestaurant("Teszt");
+		Restaurant Restaurant = RestaurantDao.getRestaurant("Cabooze");
 		Assume.assumeNotNull(Restaurant);
 
-		LOGGER.info("getRestaurant with NAME: Teszt");
+		LOGGER.info("getRestaurant with NAME: Cabooze");
 		logRestaurant(Restaurant);
 	}
 
@@ -98,15 +99,16 @@ public class RestaurantDAOImplTests extends SQLScriptLoadTests {
 			logRestaurant(Restaurant);
 		}
 	}
+	
+	@Test(expected = DeleteFailedException.class)
+	public void testDeleteRestaurantFailed() throws DeleteFailedException {
+		RestaurantDao.deleteRestaurant("sagsaga");
+	}
+
 
 	@Test
 	public void testDeleteRestaurant() throws DeleteFailedException {
-		RestaurantDao.deleteRestaurant("Teszt");
-	}
-
-	@Test(expected = DeleteFailedException.class)
-	public void testDeleteRestaurantFailed() throws DeleteFailedException {
-		RestaurantDao.deleteRestaurant("Teszt0");
+		RestaurantDao.deleteRestaurant("Isosphere");
 	}
 
 	private void logRestaurant(Restaurant Restaurant) {
@@ -124,7 +126,7 @@ public class RestaurantDAOImplTests extends SQLScriptLoadTests {
 
 	private Restaurant createRestaurantForInsert(RestaurantType type) {
 		Restaurant Restaurant = new Restaurant();
-		Restaurant.setName("ASD");
+		Restaurant.setName("Teszt");
 		Restaurant.setFounding(new Date());
 		Restaurant.setType(type);
 
