@@ -5,8 +5,16 @@ import java.util.Collection;
 import model.Food;
 
 public interface FoodMapper {
-	public Collection<Food> selectFoods();
-	public Food selectFood(int id);
+	
 	public void insertFood(Food food);
+	
 	public void updateFood(Food food);
+	
+	public Food getFoodById(int id);
+	
+	public Food getFoodByName(String name);
+	
+	public Collection<Food> getAllFood();
+	
+	public void deleteFood(int id);
 }

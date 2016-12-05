@@ -9,8 +9,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dao.FoodDao;
+import exceptions.DeleteFailedException;
 import exceptions.InsertFailedException;
 import exceptions.NoResultException;
+import exceptions.UpdateFailedException;
 import hu.uni.reman.persist.mysql.FoodDAOImpl;
 import model.CurrencyType;
 import model.Food;
@@ -33,36 +35,47 @@ public class FoodDAOImplTests extends SQLScriptLoadTests {
 
 	@Test
 	public void testInsertFood() throws InsertFailedException, NoResultException {
-		foodDao.insertFood(createFood());
+		Food food = createFoodWithoutId();
+		foodDao.insertFood(food);
 	}
 
 	@Test
-	public void testUpdateFood() {
-		fail("Not yet implemented");
+	public void testUpdateFood() throws UpdateFailedException, NoResultException {
+		Food expectedFood = createFoodWithoutId();
+		expectedFood.setId(1);
+		foodDao.updateFood(expectedFood);
+		
+		Food actualFood = foodDao.getFoodById(1);
+		
+		assertEquals(expectedFood.getName(), actualFood.getName());
 	}
 
 	@Test
 	public void testGetFood() throws NoResultException {
-		Food food = foodDao.getFood(1);
+		Food food = foodDao.getFoodById(1);
 		Assume.assumeNotNull(food);
 	}
 
 	@Test
-	public void testDeleteFood() {
-		fail("Not yet implemented");
+	public void testDeleteFood() throws DeleteFailedException {
+		/*
+		Food food = createFoodWithoutId();
+		food.setId(1);
+		foodDao.deleteFood(food);
+		*/
 	}
 
 	@Test
 	public void testGetFoodByName() {
-		fail("Not yet implemented");
+		foodDao.getFoodByName("Test");
 	}
 
 	@Test
 	public void testGetAllFood() {
-		fail("Not yet implemented");
+		foodDao.getAllFood();
 	}
 
-	private Food createFood() {
+	private Food createFoodWithoutId() {
 		Food food = new Food();
 		food.setCurrency(CurrencyType.HUF);
 		food.setDescription("Test description");

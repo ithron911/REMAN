@@ -13,11 +13,11 @@ public interface FoodDao {
 
 	public void updateFood(Food food) throws UpdateFailedException, NoResultException;
 
-	public Food getFood(int id) throws NoResultException;
+	public Food getFoodById(int id) ;
 	
-	public Food getFoodByName(String name) throws NoResultException;
+	public Food getFoodByName(String name);
 	
-	public Collection<Food> getAllFood() throws NoResultException;
+	public Collection<Food> getAllFood();
 
 	public void deleteFood(Food food) throws DeleteFailedException;
 
