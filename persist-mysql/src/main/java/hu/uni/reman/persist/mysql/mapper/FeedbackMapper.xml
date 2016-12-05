@@ -5,31 +5,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 
 <mapper namespace="hu.uni.reman.persist.mysql.mapper.FeedbackMapper">
 
-<resultMap type="model.Feedback" id="FeedbackResultMap">
-	<id property="id" column="ID" />
-	<result property="date" column="Date" javaType="java.util.Date" jdbcType="DATE"/>
-	<result property="otherComment" column="OtherComment"/>
-	<result property="rating" column="Rating" javaType="model.FeedbackRatingType" jdbcType="INTEGER"
+	<resultMap type="Feedback" id="FeedbackResultMap">
+		<id property="id" column="ID" />
+		<result property="date" column="Date" javaType="java.util.Date" jdbcType="DATE"/>
+		<result property="otherComment" column="OtherComment"/>
+		<result property="rating" column="Rating" javaType="FeedbackRating" jdbcType="INTEGER"
 		typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
-</resultMap>
+	</resultMap>
 
 
-<insert id="insertFeedback" parameterType="model.Feedback">
+	<insert id="insertFeedback" parameterType="Feedback" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 	INSERT INTO Feedback(Rating, Date, OtherComment)
-		VALUES (#{rating}, #{date}, #{otherComment});
-</insert>
+		VALUES (#{rating.ratingValue}, #{date}, #{otherComment});
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+	</insert>
 
-<update id="updateFeedback" parameterType="model.Feedback">
-	UPDATE Feedback SET RestaurantName = #{restaurantName}, PaymentID = #{payment.id},
-		FoodID = #{food.id}, Currency = #{currency.curr}, DateBook = #{dateBook}, Comment = #{comment}
+	<update id="updateFeedback" parameterType="Feedback">
+		UPDATE Feedback SET Rating = #{rating.ratingValue},
+		Date = #{date},
+		OtherComment = #{otherComment} 
 		WHERE ID = #{id};
-</update>
+	</update>
 
-<select id="getFeedback" parameterType="int" resultMap="FeedbackResultMap">
-	SELECT * FROM Feedback WHERE id = #{id}; 
-</select>
+	<select id="getFeedback" parameterType="int" resultMap="FeedbackResultMap">
+		SELECT * FROM Feedback WHERE id = #{id}; 
+	</select>
 
-<delete id="deleteFeedback">
-	DELETE FROM Feedback where Feedback.id = #{id};
-</delete>
+	<select id="getAllFeedbacks" resultMap="FeedbackResultMap">
+		SELECT * FROM Feedback;
+	</select>
+
+	<delete id="deleteFeedback">
+		DELETE FROM Feedback where Feedback.id = #{id};
+	</delete>
 </mapper>

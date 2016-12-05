@@ -61,3 +61,10 @@ CREATE TABLE OrderedFood(
 	foreign key (foodId) REFERENCES Food(ID),
 	foreign key (reservationId) REFERENCES Reservation(ID)
 );
+
+CREATE TABLE Feedback(
+	ID INT,
+	Rating INT,
+	Date DATE,
+	OtherComment VARCHAR(50)
+);

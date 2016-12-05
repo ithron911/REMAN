@@ -1,7 +1,7 @@
 package model;
 
 public enum FeedbackRating {
-	EXCELLENT(5), GOOD(4), AVERAGE(3), BAD(2), TERRIBLE(1);
+	EXCELLENT(0), GOOD(1), AVERAGE(2), BAD(3), TERRIBLE(4);
 	
 	private int ratingValue;
 	

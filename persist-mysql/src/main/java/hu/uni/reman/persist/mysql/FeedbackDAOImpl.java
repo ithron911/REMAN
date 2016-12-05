@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.Properties;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,14 +19,15 @@ import exceptions.UpdateFailedException;
 import hu.uni.reman.persist.mysql.mapper.FeedbackMapper;
 import model.Feedback;
 
-public abstract class FeedbackDAOImpl implements FeedbackDao {
+public class FeedbackDAOImpl implements FeedbackDao {
+	
 	private SqlSessionFactory sqlSessionFactory;
-
-	public FeedbackDAOImpl(String configPath, String host, int port, String db, String user, String pass)
+	
+	public FeedbackDAOImpl(String configPath, String host, int port, String db, String user, String pass, String connectionUrl)
 			throws FileNotFoundException {
 		File configFile = new File(configPath);
 		InputStream inputStream = new FileInputStream(configFile);
-		String url = String.format("jdbc:mysql://%s:%s/%s?allowMultiQueries=true", host, port, db);
+		String url = String.format(connectionUrl, host, port, db);
 		Properties props = new Properties();
 		props.put("driver", "com.mysql.jdbc.Driver");
 		props.put("url", url);
@@ -34,24 +36,22 @@ public abstract class FeedbackDAOImpl implements FeedbackDao {
 		this.sqlSessionFactory = (new SqlSessionFactoryBuilder()).build(inputStream, props);
 	}
 
-	public int insertFeedback(Feedback feedback) throws InsertFailedException {
+	@Override
+	public void insertFeedback(Feedback feedback) throws InsertFailedException {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		FeedbackMapper feedbackMapper = sqlSession.getMapper(FeedbackMapper.class);
 
-		int id = 0;
 		try {
-			feedbackMapper.insertFeedback(feedback);
-
-			id = feedback.getId();
-			if (id == 0) {
-				throw new InsertFailedException("Insertion failed!");
+			Collection<Feedback> feedbacks = feedbackMapper.getAllFeedbacks();
+			for(Feedback feedb : feedbacks) {
+				if(feedb.getId() == feedback.getId()) {
+					throw new InsertFailedException("A feedback with this id exists:" + feedback.getId());
+				}
 			}
+			feedbackMapper.insertFeedback(feedback);
 		} finally {
 			sqlSession.close();
 		}
-
-
-		return id;
 	}
 
 	@Override
@@ -59,6 +59,18 @@ public abstract class FeedbackDAOImpl implements FeedbackDao {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		FeedbackMapper feedbackMapper = sqlSession.getMapper(FeedbackMapper.class);
 
+		boolean isFeedbackExits = false;
+		Collection<Feedback> feedbacks = feedbackMapper.getAllFeedbacks();
+		for(Feedback feedb : feedbacks) {
+			if(feedb.getId() == feedback.getId()) {
+				isFeedbackExits = true;
+				break;
+			}
+		}
+		
+		if(isFeedbackExits == false) {
+			throw new UpdateFailedException("A feedback with this id does not exists:" + feedback.getId());
+		}
 		try {
 			feedbackMapper.updateFeedback(feedback);
 		} finally {
@@ -66,15 +78,16 @@ public abstract class FeedbackDAOImpl implements FeedbackDao {
 		}
 	}
 
-	public Feedback getAllFeedbacks(int id) throws NoResultException {
+	@Override
+	public Feedback getFeedback(int id) throws NoResultException {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		FeedbackMapper feedbackMapper = sqlSession.getMapper(FeedbackMapper.class);
 		Feedback feedback = null;
-
+		
 		try {
 			feedback = feedbackMapper.getFeedback(id);
 			
-			if (feedback == null) {
+			if(feedback == null) {
 				throw new NoResultException("The query has no result with id: " + id);
 			}
 		} finally {
@@ -83,11 +96,45 @@ public abstract class FeedbackDAOImpl implements FeedbackDao {
 		
 		return feedback;
 	}
+	
+	@Override
+	public Collection<Feedback> getAllFeedback() throws NoResultException {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		FeedbackMapper feedbackMapper = sqlSession.getMapper(FeedbackMapper.class);
+		Collection<Feedback> allFeedbacks = null;
 
+		try {
+			allFeedbacks = feedbackMapper.getAllFeedbacks();
+			
+			if (allFeedbacks == null) {
+				throw new NoResultException("The query has no result, the table is empty!");
+			}
+			
+		} finally {
+			sqlSession.close();
+		}
+		
+		return allFeedbacks;
+	}
+
+	@Override
 	public void deleteFeedback(int id) throws DeleteFailedException {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		FeedbackMapper feedbackMapper = sqlSession.getMapper(FeedbackMapper.class);
 
+		boolean isFeedbackExits = false;
+		Collection<Feedback> feedbacks = feedbackMapper.getAllFeedbacks();
+		for(Feedback feedb : feedbacks) {
+			if(id == feedb.getId()) {
+				isFeedbackExits = true;
+				break;
+			}
+		}
+		
+		if(isFeedbackExits == false) {
+			throw new DeleteFailedException("A feedback with this id does not exists:" + id);
+		}
+		
 		try {
 			feedbackMapper.deleteFeedback(id);
 		} finally {

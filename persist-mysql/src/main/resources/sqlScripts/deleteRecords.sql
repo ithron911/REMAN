@@ -5,3 +5,4 @@ delete from ATable;
 delete from FoodSelling;
 delete from Food;
 delete from Restaurant;
+delete from Feedback;

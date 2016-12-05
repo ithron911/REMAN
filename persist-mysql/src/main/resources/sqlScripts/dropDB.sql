@@ -1,3 +1,4 @@
+DROP TABLE Feedback;
 DROP TABLE OrderedFood;
 DROP TABLE Reservation;
 DROP TABLE Payment;
