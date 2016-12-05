@@ -17,17 +17,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 	</resultMap>
 	
 	<insert id="insertFood" parameterType="Food" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-		INSERT INTO Food VALUES (#{name}, #{foodType}, #{price}, #{currency}, #{description});
+		INSERT INTO Food(Name, FoodType, Price, currency, description) VALUES (#{name}, #{foodType}, #{price}, #{currency}, #{description});
 		<selectKey keyProperty="id" resultType="int" order="AFTER">
             SELECT LAST_INSERT_ID();
         </selectKey>
 	</insert>
 
-	<select id="selectFoods" resultMap="FoodResultMap">
-		SELECT * FROM food;
+	<select id="getAllFood" resultMap="FoodResultMap">
+		SELECT * FROM Food;
 	</select>
 
-	<select id="selectFood" parameterType="int" resultType="Food" resultMap="FoodResultMap">
-		SELECT * FROM food WHERE id = #{id};
+	<select id="getFoodById" parameterType="int" resultType="Food" resultMap="FoodResultMap">
+		SELECT * FROM Food WHERE id = #{id};
 	</select>
+	
+	<select id="getFoodByName" parameterType="String" resultType="Food" resultMap="FoodResultMap">
+		SELECT * FROM Food WHERE name = #{name};
+	</select>
+	
+	<delete id="deleteFood" parameterType="int"> 
+		delete from Food where ID = #{id}; 
+	</delete>
+	
+	<update id="updateFood" parameterType="Food">
+		update Food set 
+			Name = #{name}, 
+			FoodType = #{foodType}, 
+			Price = #{price}, 
+			currency = #{currency}, 
+			description = #{description} 
+		where ID = #{id};	
+	</update>
 </mapper>

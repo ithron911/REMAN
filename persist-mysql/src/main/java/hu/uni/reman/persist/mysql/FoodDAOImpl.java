@@ -4,13 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.Properties;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
-import com.mysql.cj.api.x.Collection;
 
 import dao.FoodDao;
 import exceptions.DeleteFailedException;
@@ -39,8 +38,8 @@ public class FoodDAOImpl implements FoodDao {
 	}
 
 	@Override
-	public void insertFood(Food food) throws InsertFailedException, NoResultException {
-		Food existFood = getFood(food.getId());
+	public void insertFood(Food food) throws InsertFailedException {
+		Food existFood = getFoodById(food.getId());
 		if (existFood != null) {
 			throw new InsertFailedException("Food is already exists");
 		}
@@ -48,67 +47,71 @@ public class FoodDAOImpl implements FoodDao {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
 
-		try {
-			foodMapper.insertFood(food);
+		foodMapper.insertFood(food);
 		
-		} finally {
-			sqlSession.close();
-		}
+		sqlSession.commit();
+		sqlSession.close();
 	}
 
 	@Override
-	public void updateFood(Food food) throws UpdateFailedException, NoResultException {
-		Food existFood = getFood(food.getId());
+	public void updateFood(Food food) throws UpdateFailedException {
+		Food existFood = getFoodById(food.getId());
 		if (existFood == null) {
 			throw new UpdateFailedException("Food is not exists");
 		}
 
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
-
-		try {
-			foodMapper.updateFood(food);
-		
-		} finally {
-			sqlSession.close();
-		}
+		foodMapper.updateFood(food);
+		sqlSession.commit();
+		sqlSession.close();
 	}
 
 	@Override
-	public Food getFood(int id) throws NoResultException {
+	public Food getFoodById(int id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
 		Food food = null;
-
-		try {
-			food = foodMapper.selectFood(id);
-		
-			if (food == null) {
-				throw new NoResultException("The query has no result with id: " + id);
-			}
-		} finally {
-			sqlSession.close();
-		}
-		
+		food = foodMapper.getFoodById(id);
+		sqlSession.commit();
+		sqlSession.close();
 		return food;
 	}
 
 	@Override
 	public void deleteFood(Food food) throws DeleteFailedException {
-		// TODO Auto-generated method stub
-
+		Food existFood = getFoodById(food.getId());
+		if (existFood == null) {
+			throw new DeleteFailedException("Food is not exists");
+		}
+		
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
+		foodMapper.deleteFood(food.getId());
+		sqlSession.commit();
+		sqlSession.close();
 	}
 
 	@Override
-	public Food getFoodByName(String name) throws NoResultException {
-		// TODO Auto-generated method stub
-		return null;
+	public Food getFoodByName(String name) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
+		Food food = null;
+		food = foodMapper.getFoodByName(name);
+		sqlSession.commit();
+		sqlSession.close();
+		return food;
 	}
 
 	@Override
-	public java.util.Collection<Food> getAllFood() throws NoResultException {
-		// TODO Auto-generated method stub
-		return null;
+	public Collection<Food> getAllFood() {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
+		Collection<Food> food = null;
+		food = foodMapper.getAllFood();
+		sqlSession.commit();
+		sqlSession.close();
+		return food;
 	}
 
 }

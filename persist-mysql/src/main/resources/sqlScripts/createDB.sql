@@ -1,11 +1,11 @@
-CREATE TABLE Restaurant(
+CREATE TABLE if not exists Restaurant(
 	Name VARCHAR(30) NOT NULL,
 	Founding DATE,
 	Type INT,
 	PRIMARY KEY ( Name )
 );
 
-CREATE TABLE Food(
+CREATE TABLE if not exists Food(
 	ID INT NOT NULL AUTO_INCREMENT,
     Name VARCHAR(100) NOT NULL,
     FoodType INT,
@@ -15,7 +15,7 @@ CREATE TABLE Food(
     PRIMARY KEY ( ID )
 );
 
-CREATE TABLE FoodSelling(
+CREATE TABLE if not exists FoodSelling(
 	foodId INT,
 	restaurantId VARCHAR(30),
 	primary key (foodId,restaurantId),
@@ -23,7 +23,7 @@ CREATE TABLE FoodSelling(
 	foreign key (restaurantId) REFERENCES Restaurant(Name)
 );
 
-CREATE TABLE ATable(
+CREATE TABLE if not exists ATable(
 	ID INT NOT NULL AUTO_INCREMENT,
 	RestaurantName VARCHAR(30),
 	TableType VARCHAR(50),
@@ -32,7 +32,7 @@ CREATE TABLE ATable(
 	FOREIGN KEY ( RestaurantName ) REFERENCES Restaurant(Name)
 );                  
 
-CREATE TABLE Payment(
+CREATE TABLE if not exists Payment(
 	ID INT NOT NULL AUTO_INCREMENT,
 	RestaurantName VARCHAR(30),
 	PaymentType INT,
@@ -41,7 +41,7 @@ CREATE TABLE Payment(
 );
 
 
-CREATE TABLE Reservation(
+CREATE TABLE if not exists Reservation(
     ID INT NOT NULL AUTO_INCREMENT,
 	RestaurantName VARCHAR(30),
 	PaymentID INT,
@@ -54,7 +54,7 @@ CREATE TABLE Reservation(
 	FOREIGN KEY ( PaymentID ) REFERENCES Payment(ID)
 );
 
-CREATE TABLE OrderedFood(
+CREATE TABLE if not exists OrderedFood(
 	reservationId INT,
 	foodId INT,
 	primary key (foodId,reservationId),
