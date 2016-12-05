@@ -2,18 +2,18 @@ package model;
 
 public enum PaymentType {
 
-	IN_CASH("inCash"),
-	WITH_CARD("withCard"),
-	ONLINE("online"),
-	COUPON("coupon");
+	IN_CASH(0),
+	WITH_CARD(1),
+	ONLINE(2),
+	COUPON(3);
 
-	private String paymentType;
+	private int paymentType;
 
-	private PaymentType(String paymentType) {
+	private PaymentType(int paymentType) {
 		this.paymentType = paymentType;
 	}
 
-	public String getPaymentType() {
+	public int getPaymentType() {
 		return paymentType;
 	}
 }

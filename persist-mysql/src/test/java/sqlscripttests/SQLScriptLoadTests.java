@@ -8,15 +8,11 @@ import java.sql.SQLException;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
 import com.mysql.cj.jdbc.Driver;
 
@@ -56,6 +52,20 @@ public class SQLScriptLoadTests {
 
 	}
 
+	@Before
+	public void setUp() {
+		
+			runSQLScript("sqlScripts/insertDB.sql");
+		
+	}
+
+	@After
+	public void tearDown() {
+		
+			runSQLScript("sqlScripts/deleteRecords.sql");
+		
+	}
+
 	private static void runSQLScript(String scriptFilePath) {
 
 		try {
@@ -80,19 +90,4 @@ public class SQLScriptLoadTests {
 		}
 		
 	}
-
-	@Before
-	public void setUp() {
-		
-			runSQLScript("sqlScripts/insertDB.sql");
-		
-	}
-
-	@After
-	public void tearDown() {
-		
-			runSQLScript("sqlScripts/deleteRecords.sql");
-		
-	}
-
 }

@@ -12,7 +12,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import dao.FoodDao;
 import exceptions.DeleteFailedException;
 import exceptions.InsertFailedException;
-import exceptions.MultipleResultException;
 import exceptions.NoResultException;
 import exceptions.UpdateFailedException;
 import model.Food;
@@ -46,7 +45,7 @@ public class FoodDAOImpl implements FoodDao {
 	}
 
 	@Override
-	public void getFood(Food food) throws NoResultException, MultipleResultException {
+	public void getFood(Food food) throws NoResultException {
 		// TODO Auto-generated method stub
 
 	}

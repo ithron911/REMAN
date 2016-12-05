@@ -8,10 +8,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="${driver}" />
-				<property name="url" value="${url}"/>
+				<property name="url" value="${url}" />
 				<property name="username" value="${username}" />
 				<property name="password" value="${password}" />
 			</dataSource>
 		</environment>
 	</environments>
+
+	<mappers>
+		<mapper resource="hu/uni/reman/persist/mysql/mapper/ReservationMapper.xml" />
+	</mappers>
 </configuration>
