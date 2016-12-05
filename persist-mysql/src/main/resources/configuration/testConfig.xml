@@ -18,30 +18,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="RestaurantType" type="model.RestaurantType" />
 		<typeAlias alias="Table" type="model.Table" />
 		<typeAlias alias="TableType" type="model.TableType" />
-
-		<typeAlias alias="CurrencyTypeHandler"
-			type="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
-		<typeAlias alias="FoodTypeHandler"
-			type="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
-		<typeAlias alias="PaymentTypeHandler"
-			type="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
-		<typeAlias alias="RestaurantTypeHandler"
-			type="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
-		<typeAlias alias="TableTypeHandler"
-			type="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
 	</typeAliases>
-	<typeHandlers>
-		<typeHandler handler="CurrencyTypeHandler" javaType="CurrencyType"
-			jdbcType="INTEGER" />
-		<typeHandler handler="FoodTypeHandler" javaType="FoodType"
-			jdbcType="INTEGER" />
-		<typeHandler handler="PaymentTypeHandler" javaType="PaymentType"
-			jdbcType="INTEGER" />
-		<typeHandler handler="RestaurantTypeHandler" javaType="RestaurantType"
-			jdbcType="INTEGER" />
-		<typeHandler handler="TableTypeHandler" javaType="TableType"
-			jdbcType="INTEGER" />
-	</typeHandlers>
 
 	<environments default="development">
 		<environment id="development">
@@ -57,5 +34,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 	<mappers>
 		<mapper resource="hu/uni/reman/persist/mysql/mapper/ReservationMapper.xml" />
+		<mapper resource="hu/uni/reman/persist/mysql/mapper/FoodMapper.xml" />
 	</mappers>
 </configuration>

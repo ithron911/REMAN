@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 			jdbcType="DATE" />
 		<result property="price" column="Price" />
 		<result property="currency" column="Currency" javaType="CurrencyType"
-			jdbcType="INTEGER" typeHandler="CurrencyTypeHandler" />
+			jdbcType="INTEGER" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
 		<result property="comment" column="Comment" />
 		<result property="restaurantName" column="RestaurantName" />
 		<association property="payment" column="PaymentId"
@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 	<resultMap type="Payment" id="PaymentResultMap">
 		<id property="id" column="ID" />
 		<result property="paymentType" column="PaymentType" javaType="PaymentType"
-			jdbcType="INTEGER" typeHandler="PaymentTypeHandler" />
+			jdbcType="INTEGER" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
 	</resultMap>
 
 	<insert id="insertReservation" parameterType="Reservation">
