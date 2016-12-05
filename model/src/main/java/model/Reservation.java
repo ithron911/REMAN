@@ -6,7 +6,6 @@ import java.util.List;
 public class Reservation {
 
 	private int id;
-	private Food food;
 	private Date dateBook;
 	private double price;
 	private CurrencyType currency;
@@ -23,14 +22,6 @@ public class Reservation {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Food getFood() {
-		return food;
-	}
-
-	public void setFood(Food food) {
-		this.food = food;
 	}
 
 	public Date getDateBook() {

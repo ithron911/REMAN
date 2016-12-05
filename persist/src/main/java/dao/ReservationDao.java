@@ -9,7 +9,7 @@ import exceptions.UpdateFailedException;
 import model.Reservation;
 
 public interface ReservationDao {
-	public int insertReservation(Reservation reservation) throws InsertFailedException;
+	public void insertReservation(Reservation reservation) throws InsertFailedException;
 
 	public void updateReservation(Reservation reservation) throws UpdateFailedException;
 

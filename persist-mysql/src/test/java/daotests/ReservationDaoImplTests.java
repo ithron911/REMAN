@@ -18,7 +18,6 @@ import exceptions.NoResultException;
 import exceptions.UpdateFailedException;
 import hu.uni.reman.persist.mysql.ReservationDAOImpl;
 import model.CurrencyType;
-import model.Food;
 import model.Payment;
 import model.Reservation;
 import model.Table;
@@ -41,19 +40,38 @@ public class ReservationDaoImplTests extends SQLScriptLoadTests {
 		}
 	}
 
-	@Test()
+	@Test
 	public void testInsertReservation() throws InsertFailedException {
 		Reservation reservation = createCompleteReservationForInsert();
 		
-		int id = reservationDao.insertReservation(reservation);
+		reservationDao.insertReservation(reservation);
 
-		LOGGER.info("Insert succesful with ID: " + id);
+	}
+
+	@Test(expected = InsertFailedException.class)
+	public void testInsertReservationFail() throws InsertFailedException {
+		Reservation reservation = createCompleteReservationForInsert();
+		reservation.setId(1);
+		
+		reservationDao.insertReservation(reservation);
+
 	}
 
 	@Test
 	public void testUpdateReservation() throws NoResultException, UpdateFailedException {
 		Reservation reservation = reservationDao.getReservation(1);
 		logReservation(reservation);
+
+		reservation.setComment("Test changed comment!");
+
+		reservationDao.updateReservation(reservation);
+	}
+
+	@Test(expected = UpdateFailedException.class)
+	public void testUpdateReservationFail() throws NoResultException, UpdateFailedException {
+		Reservation reservation = reservationDao.getReservation(1);
+		logReservation(reservation);
+		reservation.setId(0);
 
 		reservation.setComment("Test changed comment!");
 
@@ -70,9 +88,10 @@ public class ReservationDaoImplTests extends SQLScriptLoadTests {
 	}
 
 	@Test(expected = NoResultException.class)
-	public void testGetReservationFailed() throws FileNotFoundException, NoResultException {
+	public void testGetReservationFail() throws FileNotFoundException, NoResultException {
 		reservationDao.getReservation(-1);
 	}
+
 
 	@Test
 	public void testGetAllReservation() throws NoResultException {
@@ -89,6 +108,11 @@ public class ReservationDaoImplTests extends SQLScriptLoadTests {
 	@Test
 	public void testDeleteReservation() throws DeleteFailedException {
 		reservationDao.deleteReservation(10);
+	}
+
+	@Test(expected = DeleteFailedException.class)
+	public void testDeleteReservationFailed() throws DeleteFailedException {
+		reservationDao.deleteReservation(-1);
 	}
 
 	private void logReservation(Reservation reservation) {
@@ -109,20 +133,17 @@ public class ReservationDaoImplTests extends SQLScriptLoadTests {
 	}
 
 	private Reservation createCompleteReservationForInsert() {
-		Food food = new Food();
-		food.setId(1);
 		Payment payment = new Payment();
 		payment.setId(1);
 
-		return createReservationForInsert(food, payment);
+		return createReservationForInsert(payment);
 	}
 
-	private Reservation createReservationForInsert(Food food, Payment payment) {
+	private Reservation createReservationForInsert(Payment payment) {
 		Reservation reservation = new Reservation();
 		reservation.setComment("");
 		reservation.setCurrency(CurrencyType.EUR);
 		reservation.setDateBook(new Date());
-		reservation.setFood(food);
 		reservation.setPayment(payment);
 		reservation.setPrice(10000);
 		reservation.setRestaurant("Alephant");

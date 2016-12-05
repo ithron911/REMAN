@@ -27,10 +27,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 	</resultMap>
 
 	<insert id="insertReservation" parameterType="Reservation" useGeneratedKeys="true" keyProperty="id"  keyColumn="id">
-		INSERT INTO Reservation(RestaurantName, PaymentID, FoodID, Currency,
+		INSERT INTO Reservation(RestaurantName, PaymentID, Currency,
 		DateBook, Comment)
-		VALUES (#{restaurantName}, #{payment.id},
-		#{food.id}, #{currency.curr}, #{dateBook}, #{comment});
+		VALUES (#{restaurantName}, #{payment.id}, #{currency.curr}, #{dateBook}, #{comment});
 		<selectKey keyProperty="id" resultType="int" order="AFTER">
             SELECT LAST_INSERT_ID();
         </selectKey>
@@ -39,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 	<update id="updateReservation" parameterType="Reservation">
 		UPDATE Reservation SET RestaurantName = #{restaurantName}, PaymentID =
 		#{payment.id},
-		FoodID = #{food.id}, Currency = #{currency.curr},
+		Currency = #{currency.curr},
 		DateBook = #{dateBook}, Comment = #{comment}
 		WHERE ID = #{id};
 	</update>

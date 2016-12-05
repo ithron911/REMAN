@@ -10,6 +10,7 @@ import java.util.Properties;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.log4j.Logger;
 
 import dao.ReservationDao;
 import exceptions.DeleteFailedException;
@@ -22,6 +23,8 @@ import model.Reservation;
 public class ReservationDAOImpl implements ReservationDao {
 
 	private SqlSessionFactory sqlSessionFactory;
+
+	Logger LOGGER = Logger.getLogger(ReservationDAOImpl.class);
 
 	public ReservationDAOImpl(String configPath, String host, int port, String db, String user, String pass, String connectionUrl)
 			throws FileNotFoundException {
@@ -37,24 +40,21 @@ public class ReservationDAOImpl implements ReservationDao {
 	}
 
 	@Override
-	public int insertReservation(Reservation reservation) throws InsertFailedException {
+	public void insertReservation(Reservation reservation) throws InsertFailedException {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		ReservationMapper reservationMapper = sqlSession.getMapper(ReservationMapper.class);
 
-		int id = 0;
 		try {
-			reservationMapper.insertReservation(reservation);
-
-			id = reservation.getId();
-			if (id == 0) {
-				throw new InsertFailedException("Insertion failed!");
+			Collection<Reservation> reservations = reservationMapper.getAllReservations();
+			for (Reservation res : reservations) {
+				if (res.getId() == reservation.getId()) {
+					throw new InsertFailedException("A reservation with this id exists:" + reservation.getId());
+				}
 			}
+			reservationMapper.insertReservation(reservation);
 		} finally {
 			sqlSession.close();
 		}
-
-
-		return id;
 	}
 
 	@Override
@@ -62,6 +62,19 @@ public class ReservationDAOImpl implements ReservationDao {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		ReservationMapper reservationMapper = sqlSession.getMapper(ReservationMapper.class);
 
+		boolean isReservationExits = false;
+		Collection<Reservation> reservations = reservationMapper.getAllReservations();
+		for (Reservation res : reservations) {
+			if (res.getId() == reservation.getId()) {
+				isReservationExits = true;
+				break;
+			}
+
+		}
+		
+		if (isReservationExits == false) {
+			throw new UpdateFailedException("A reservation with this id does not exists:" + reservation.getId());
+		}
 		try {
 			reservationMapper.updateReservation(reservation);
 		} finally {
@@ -112,6 +125,19 @@ public class ReservationDAOImpl implements ReservationDao {
 	public void deleteReservation(int id) throws DeleteFailedException {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		ReservationMapper reservationMapper = sqlSession.getMapper(ReservationMapper.class);
+
+		boolean isReservationExits = false;
+		Collection<Reservation> reservations = reservationMapper.getAllReservations();
+		for (Reservation res : reservations) {
+			if (id == res.getId()) {
+				isReservationExits = true;
+				break;
+			}
+		}
+
+		if (isReservationExits == false) {
+			throw new DeleteFailedException("A reservation with this id does not exists:" + id);
+		}
 
 		try {
 			reservationMapper.deleteReservation(id);
