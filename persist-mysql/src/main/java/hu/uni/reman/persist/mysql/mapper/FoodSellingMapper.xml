@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hu.uni.reman.persist.mysql.mapper.FoodSellingMapper">
+
+	<resultMap type="FoodSelling" id="FoodSellingResultMap">
+		<result property="restaurantName" column="restaurantName" 
+		javaType="String" jdbcType="VARCHAR" />
+		<result property="foodId" column="foodId" 
+		javaType="int" jdbcType="INTEGER" />
+	</resultMap>
+
+	<insert id="insertFoodToRestaurant" parameterType="FoodSelling" useGeneratedKeys="true" keyProperty="id"  keyColumn="id">
+		INSERT INTO FoodSelling(foodId, restaurantId) VALUES (#{foodId}, #{restaurantName});
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+	</insert>
+
+	<select id="getAllRestaurantByFoodId" parameterType="int" resultMap="FoodSellingResultMap">
+		SELECT * FROM FoodSelling WHERE foodId = #{foodId};
+	</select>
+
+	<select id="getAllFoodsByRestaurantId" parameterType="String" resultMap="FoodSellingResultMap">
+		SELECT * FROM FoodSelling WHERE restaurantId = #{restaurantName};
+	</select>
+
+	<delete id="deleteRestaurantsFoodByFoodId" parameterType="int">
+		DELETE FROM FoodSelling WHERE foodId = #{foodId};
+	</delete>
+	
+	<delete id="deleteFoodByRestaurantId" parameterType="String">
+		DELETE FROM FoodSelling WHERE restaurantId = #{restaurantName};
+	</delete>
+</mapper>
