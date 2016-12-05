@@ -13,11 +13,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 			jdbcType="INTEGER" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
 	</resultMap>
 
-	<insert id="insertRestaurant" parameterType="Restaurant" useGeneratedKeys="true" keyProperty="id"  keyColumn="id">
+	<insert id="insertRestaurant" parameterType="Restaurant" useGeneratedKeys="true" keyProperty="name"  keyColumn="name">
 		INSERT INTO Restaurant(Name, Founding, Type)
 		VALUES (#{Name}, #{founding},
 		#{RestaurantType.restaurantType});
-		<selectKey keyProperty="Name" resultType="varchar" order="AFTER">
+		<selectKey keyProperty="Name" resultType="java.lang.String" order="AFTER">
             SELECT LAST_INSERT_ID();
         </selectKey>
 	</insert>
@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		UPDATE Restaurant SET Name = #{Name}, Founding = #(Founding), Type = #(Type));
 	</update>
 
-	<select id="getRestaurant" parameterType="varchar" resultMap="RestaurantResultMap">
+	<select id="getRestaurant" parameterType="java.lang.String" resultMap="RestaurantResultMap">
 		SELECT * FROM Restaurant WHERE Name = #{Name};
 	</select>
 

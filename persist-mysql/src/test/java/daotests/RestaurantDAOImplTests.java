@@ -52,6 +52,7 @@ public class RestaurantDAOImplTests extends SQLScriptLoadTests {
 		Restaurant.setName("Teszt");
 
 		RestaurantDao.insertRestaurant(Restaurant);
+		
 
 	}
 
