@@ -21,12 +21,7 @@ public class Food {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public FoodType getFoodTypes() {
-		return foodType;
-	}
-	public void setFoodTypes(FoodType foodType) {
-		this.foodType = foodType;
-	}
+	
 	public double getPrice() {
 		return price;
 	}
@@ -39,14 +34,14 @@ public class Food {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public FoodType getFoodType() {
-		return foodType;
+	public int getFoodType() {
+		return foodType.getType();
 	}
 	public void setFoodType(FoodType foodType) {
 		this.foodType = foodType;
 	}
-	public CurrencyType getCurrency() {
-		return currency;
+	public int getCurrency() {
+		return currency.getCurr();
 	}
 	public void setCurrency(CurrencyType currency) {
 		this.currency = currency;

@@ -16,11 +16,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		<result property="description" column="description" />
 	</resultMap>
 	
-	<insert id="insertReservation" parameterType="Food">
-		INSERT INTO Food(ID, RestaurantName, Name, FoodType,
-		Price, currency, description)
-		VALUES (#{id}, #{name},
-		#{food.id}, #{currency.curr}, #{dateBook}, #{comment});
+	<insert id="insertFood" parameterType="Food" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		INSERT INTO Food VALUES (#{name}, #{foodType}, #{price}, #{currency}, #{description});
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
 	</insert>
 
 	<select id="selectFoods" resultMap="FoodResultMap">

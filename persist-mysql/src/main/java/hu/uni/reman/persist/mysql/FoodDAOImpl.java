@@ -41,27 +41,37 @@ public class FoodDAOImpl implements FoodDao {
 	@Override
 	public void insertFood(Food food) throws InsertFailedException, NoResultException {
 		Food existFood = getFood(food.getId());
-		System.out.println(existFood);
+		if (existFood != null) {
+			throw new InsertFailedException("Food is already exists");
+		}
+		
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
 
-		int id = 0;
 		try {
 			foodMapper.insertFood(food);
-
-			id = food.getId();
-			if (id == 0) {
-				throw new InsertFailedException("Insertion failed!");
-			}
+		
 		} finally {
 			sqlSession.close();
 		}
 	}
 
 	@Override
-	public void updateFood(Food food) throws UpdateFailedException {
-		// TODO Auto-generated method stub
+	public void updateFood(Food food) throws UpdateFailedException, NoResultException {
+		Food existFood = getFood(food.getId());
+		if (existFood == null) {
+			throw new UpdateFailedException("Food is not exists");
+		}
 
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		FoodMapper foodMapper = sqlSession.getMapper(FoodMapper.class);
+
+		try {
+			foodMapper.updateFood(food);
+		
+		} finally {
+			sqlSession.close();
+		}
 	}
 
 	@Override
@@ -73,7 +83,6 @@ public class FoodDAOImpl implements FoodDao {
 		try {
 			food = foodMapper.selectFood(id);
 		
-			System.out.println(food);
 			if (food == null) {
 				throw new NoResultException("The query has no result with id: " + id);
 			}
@@ -88,6 +97,18 @@ public class FoodDAOImpl implements FoodDao {
 	public void deleteFood(Food food) throws DeleteFailedException {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Food getFoodByName(String name) throws NoResultException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public java.util.Collection<Food> getAllFood() throws NoResultException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

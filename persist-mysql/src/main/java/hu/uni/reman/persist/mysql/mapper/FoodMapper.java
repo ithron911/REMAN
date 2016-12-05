@@ -7,5 +7,6 @@ import model.Food;
 public interface FoodMapper {
 	public Collection<Food> selectFoods();
 	public Food selectFood(int id);
-	public Food insertFood(Food food);
+	public void insertFood(Food food);
+	public void updateFood(Food food);
 }
